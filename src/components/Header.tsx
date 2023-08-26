@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import trainer from '../assets/images/trainer.png'
 
 function Header() {
@@ -8,10 +9,15 @@ function Header() {
           Gym<span className="text-primary">24 </span>
         </p>
         <ul className="flex gap-18.75">
-          <li>Advantages</li>
-          <li>Membership</li>
-          <li>About</li>
-          <li>Trainers</li>
+          <Link to="/">
+            <li>Home</li>
+          </Link>
+          <Link to="/courses">
+            <li>Course</li>
+          </Link>
+          <Link to="/search">
+            <li>Search</li>
+          </Link>
         </ul>
       </div>
       <div className="absolute -z-10 top-0 right-0 trainer-image">
