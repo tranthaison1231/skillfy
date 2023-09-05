@@ -1,31 +1,27 @@
-import AboutUs from '../components/AboutUs'
-import Banner from '../components/Banner'
-import Footer from '../components/Footer'
-import Membership from '../components/Membership'
-import ReasonsToJoin from '../components/ReasonsToJoin'
-import TrainerStaff from '../components/TrainerStaff'
+import { useEffect } from 'react'
+import { useLocation } from 'react-router-dom'
 
 export default function Home() {
+  const { hash } = useLocation()
+
+  useEffect(() => {
+    if (hash) {
+      const element = document.getElementById(hash.replace('#', ''))
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' })
+      }
+    }
+  }, [hash])
+
   return (
-    <>
-      <div className="mt-56 px-56">
-        <Banner />
+    <div>
+      <div style={{ height: 800 }}>Home</div>
+      <div style={{ height: 800 }} id="about-us">
+        About US
       </div>
-      <div className="mt-106 px-56">
-        <ReasonsToJoin />
+      <div style={{ height: 800 }} id="our-team">
+        Our Team
       </div>
-      <div className="mt-62.5 px-56">
-        <Membership />
-      </div>
-      <div className="mt-62.5 px-56">
-        <AboutUs />
-      </div>
-      <div className="mt-62.5 px-56">
-        <TrainerStaff />
-      </div>
-      <div className="mt-62.5">
-        <Footer />
-      </div>
-    </>
+    </div>
   )
 }

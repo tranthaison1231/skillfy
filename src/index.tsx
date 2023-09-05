@@ -1,12 +1,11 @@
 import { createRoot } from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import './style.css'
-import Home from './pages/home'
-import Courses from './pages/courses'
-import Search from './pages/search'
-import CourseDetail from './pages/course-detail'
 import Layout from './layouts/Layout'
 import NotFound from './pages/404'
+import Home from './pages/home'
+import SearchInOffers from './pages/search'
+import './style.css'
+import Room from './pages/room'
 
 const router = createBrowserRouter([
   {
@@ -14,20 +13,16 @@ const router = createBrowserRouter([
     element: <Layout />,
     children: [
       {
+        path: '/:id',
+        element: <Room />
+      },
+      {
         path: '/',
         element: <Home />
       },
       {
-        path: '/courses',
-        element: <Courses />
-      },
-      {
-        path: '/course/:id',
-        element: <CourseDetail />
-      },
-      {
         path: '/search',
-        element: <Search />
+        element: <SearchInOffers />
       }
     ]
   },
