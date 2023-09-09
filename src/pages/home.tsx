@@ -1,21 +1,12 @@
-import { useEffect } from 'react'
-import { useLocation } from 'react-router-dom'
+import useScrollWhenHashChange from '@/hooks/useScrollWhenHashChange'
+import Welcome from '@/components/Welcome'
 
 export default function Home() {
-  const { hash } = useLocation()
-
-  useEffect(() => {
-    if (hash) {
-      const element = document.getElementById(hash.replace('#', ''))
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' })
-      }
-    }
-  }, [hash])
+  useScrollWhenHashChange()
 
   return (
     <div>
-      <div style={{ height: 800 }}>Home</div>
+      <Welcome className="mt-16" />
       <div style={{ height: 800 }} id="about-us">
         About US
       </div>
