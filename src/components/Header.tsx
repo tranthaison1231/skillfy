@@ -1,6 +1,6 @@
-import { Link } from 'react-router-dom'
 import { Button } from '@/components/ui/Button'
 import logo from '@/assets/svgs/logo.svg'
+import { Link } from 'react-router-dom'
 
 function Header() {
   return (

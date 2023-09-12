@@ -1,3 +1,6 @@
+import { Button } from '@/components/ui/Button'
+import { Input } from '@/components/ui/Input'
+import { Search } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 
@@ -23,11 +26,16 @@ export default function SearchInOffers() {
 
   return (
     <div className="p-40 flex flex-col justify-center items-center">
-      <div className="w-fit mb-10">
-        <input ref={inputRef} placeholder="Enter a keyword" className="w-fit" />
-        <button className="w-fit" onClick={handleSearch}>
+      <div className="w-fit mb-10 flex">
+        <Input
+          icon={Search}
+          ref={inputRef}
+          placeholder="Enter a keyword"
+          className="w-fit"
+        />
+        <Button className="w-fit" onClick={handleSearch}>
           Search
-        </button>
+        </Button>
       </div>
       <div className="grid grid-cols-3 gap-3">
         {rooms.map(room => (

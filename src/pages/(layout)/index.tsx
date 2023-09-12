@@ -1,7 +1,7 @@
 import useScrollWhenHashChange from '@/hooks/useScrollWhenHashChange'
 import Welcome from '@/components/Welcome'
 
-export default function Home() {
+function Home() {
   useScrollWhenHashChange()
 
   return (
@@ -16,3 +16,5 @@ export default function Home() {
     </div>
   )
 }
+
+export default Home
