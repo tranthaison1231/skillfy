@@ -16,7 +16,7 @@ const descriptionReferences = [
 ]
 export default function References() {
   return (
-    <div className="max-w-5xl mx-auto my-44">
+    <div id="references" className="max-w-5xl mx-auto my-44">
       <div className="w-1/2">
         <h1 className="text-5xl font-bold leading-[69px] text-[#091638]">
           References
