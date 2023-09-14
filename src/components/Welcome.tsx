@@ -20,7 +20,7 @@ export default function Welcome({ className }: Props) {
   return (
     <div className={twMerge('flex gap-9 relative', className)}>
       <div>
-        <h2 className="text-6xl mb-2">
+        <h2 className="mb-2 text-6xl">
           {' '}
           Modern living <br /> for everyone
         </h2>
