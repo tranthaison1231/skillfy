@@ -5,10 +5,10 @@ import Plane from '@/assets/images/plane.png'
 function Footer() {
   return (
     <footer>
-      <div className="flex items-center justify-center gap-8 h-[398px] bg-secondary">
+      <div className="flex items-center justify-center gap-8 h-400 bg-secondary">
         <img src={Plane} alt="Plane" className="mr-20" />
         <div>
-          <h1 className="text-4xl font-bold leading-[44.16px]">
+          <h1 className="text-4xl font-bold leading-10">
             Subscribe to newsletter
           </h1>
           <p className="mb-4 text-xl leading-9">

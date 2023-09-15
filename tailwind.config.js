@@ -73,6 +73,27 @@ module.exports = {
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out'
+      },
+      height: {
+        86: '86px',
+        90: '90px',
+        100: '100px',
+        400: '400px',
+        447: '447px',
+        470: '470px',
+        500: '500px',
+        530: '530px',
+        570: '570px',
+        750: '750px'
+      },
+      width: {
+        100: '100px',
+        352: '352px',
+        391: '391px',
+        500: '500px',
+        530: '530px',
+        611: '611px',
+        1000: '1000px'
       }
     }
   },

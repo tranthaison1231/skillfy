@@ -9,13 +9,13 @@ function Home() {
   return (
     <div>
       <Welcome className="mt-16" />
-      <div style={{ height: 500, marginTop: '60px' }} id="about-us">
+      <div className="mt-16 mb-9 h-500" id="about-us">
         <AboutUs />
       </div>
-      <div style={{ height: 750, marginTop: '30px' }} id="our-team">
+      <div className="h-750" id="our-team">
         <OurTeam></OurTeam>
       </div>
-      <div style={{ height: 550, marginTop: '30px' }} id="our-team">
+      <div className="mt-8 h-570" id="references">
         <References></References>
       </div>
     </div>

@@ -1,6 +1,6 @@
 import React from 'react'
 import Avatar from '@/assets/images/avatar.png'
-import bgLogo from '@/assets/icons/bg-logo.png'
+import bgLogo from '@/assets/images/bg-logo.png'
 import { Button } from '@/components/ui/Button'
 import { useNavigate } from '@/router'
 import Logo1 from '@/assets/svgs/logo-1.svg'
@@ -48,41 +48,37 @@ export default function lock() {
       <div className="w-[40%] flex justify-start mr-auto">
         <form
           onSubmit={onSubmit}
-          className="flex flex-col items-center justify-center m-auto w-[391px]"
+          className="flex flex-col items-center justify-center m-auto w-391"
         >
-          <div className="flex mr-auto mb-[30px] gap-2">
+          <div className="flex gap-2 mb-8 mr-auto">
             <img src={Logo1} alt="logo" />
-            <div className="text-slate-800 text-[33px] font-normal font-['Inter'] leading-[42.90px]">
+            <div className="text-3xl font-normal leading-10 text-slate-800">
               Hope Ui
             </div>
           </div>
           <div className="flex flex-col items-center justify-center m-auto w-[391px]">
-            <img
-              src={Avatar}
-              alt="avatar-user"
-              className="w-[100px] h-[100px] flex "
-            />
+            <img src={Avatar} alt="avatar-user" className="flex w-100 h-100 " />
             {username.map(user => (
               <h1
-                className="text-slate-800 text-[33px] font-medium "
+                className="text-3xl font-medium text-slate-800 "
                 key={user.id}
               >
                 Hi ! {user.name}
               </h1>
             ))}
-            <p className="w-[490px] text-center text-gray-400 mb-7">
+            <p className="text-center text-gray-400 w-500 mb-7">
               Enter your password to acess the admin.
             </p>
             <div className="">
               <label
                 htmlFor="password"
-                className="w-[111px] flex text-gray-400 mb-2 cursor-pointer"
+                className="flex mb-2 text-gray-400 cursor-pointer w-100"
               >
                 Password
               </label>
               <Input
                 placeholder="Password"
-                className="mb-8 w-[400px]"
+                className="mb-8 w-352"
                 type="password"
                 id="password"
                 name="password"
@@ -96,7 +92,7 @@ export default function lock() {
       </div>
       <div className="relative w-[60%] h-screen bg-gradient-to-br from-blue-500 to-blue-900 ">
         <img
-          className="absolute top-0 h-screen m-0 ml-[157px] opacity-10 right 0"
+          className="absolute top-0 h-screen m-0 ml-40 opacity-10 right 0"
           src={Background}
           alt="background"
         />

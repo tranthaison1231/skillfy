@@ -18,10 +18,10 @@ export default function References() {
   return (
     <div id="references" className="max-w-5xl mx-auto my-44">
       <div className="w-1/2">
-        <h1 className="text-5xl font-bold leading-[69px] text-[#091638]">
+        <h1 className="text-5xl font-bold leading-[69px] text-lightgray">
           References
         </h1>
-        <p className="w-[611px] text-[#091638]">
+        <p className="w-611 text-lightgray">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit.
           <br />
           Purus rutrum donec ultricies cras id ac.
@@ -32,11 +32,11 @@ export default function References() {
           <div key={ref.name} className="p-6 bg-secondary">
             <div className="flex items-start gap-3">
               <img src={Reference} alt="references" />
-              <p className="pt-2 text-[#091638]">{ref.desc}</p>
+              <p className="pt-2 text-lightgray">{ref.desc}</p>
             </div>
             <div className="mt-6">
-              <h2 className="text-xl font-bold text-[#091638]">{ref.name}</h2>
-              <p className="text-[#091638]">{ref.title}</p>
+              <h2 className="text-xl font-bold text-lightgray">{ref.name}</h2>
+              <p className="text-lightgray">{ref.title}</p>
             </div>
           </div>
         ))}
