@@ -42,7 +42,13 @@ export default function Login() {
     const data = new FormData(e.currentTarget)
     const email = data.get('email')
     const password = data.get('password')
-    if (email === 'enouvo@gmail.com' && password === '123456') {
+    const accounts = JSON.parse(localStorage.getItem('accounts'))
+    const checkAccount = accounts.some(account => {
+      return account.email === email && account.password === password
+    })
+
+    console.log(checkAccount)
+    if (checkAccount) {
       localStorage.setItem('isAuth', 'true')
       navigate('/admin')
     } else {
