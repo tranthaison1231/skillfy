@@ -7,10 +7,10 @@ export default function AboutUs() {
           <img src={About} alt="About" className="w-530 h-470" />
         </div>
         <div className="ml-24">
-          <h1 className="text-5xl font-bold w-352 h-14 text-darkBlue">
+          <h1 className="text-5xl font-bold w-352 h-14 text-lightgray">
             About us
           </h1>
-          <p className="text-lg w-352 h-447 text-darkBlue">
+          <p className="text-lg w-352 h-447 text-lightgray">
             We are a company that connects the world of real estate and finance.
             We provide a complete service for the sale, purchase or rental of
             real estate. Our advantage is more than 15 years of experience and
