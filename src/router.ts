@@ -11,6 +11,7 @@ export type Path =
   | `/lock`
   | `/login`
   | `/search`
+  | `/sign-up`
   | `/success`
 
 export type Params = {
