@@ -1,17 +1,13 @@
-import { Routes } from '@generouted/react-router'
 import { createRoot } from 'react-dom/client'
-import { Toaster } from './components/ui/Toaster'
 import './style.css'
-
-function App() {
-  return (
-    <>
-      <Routes />
-      <Toaster />
-    </>
-  )
-}
+import { Routes } from '@generouted/react-router/lazy'
+import { Toaster } from './components/ui/Toaster'
 
 const root = createRoot(document.getElementById('root'))
 
-root.render(<App />)
+root.render(
+  <>
+    <Routes />
+    <Toaster />
+  </>
+)

@@ -3,8 +3,7 @@ import { Input } from '@/components/ui/Input'
 import { Checkbox } from '@/components/ui/Checkbox'
 import { useToast } from '@/components/ui/use-toast'
 import { Link, useNavigate } from '@/router'
-import signin from '@/assets/images/bg-signin.png'
-import logo from '@/assets/svgs/logo.svg'
+import signIn from '@/assets/images/bg-signin.png'
 import gmail from '@/assets/svgs/gmail.svg'
 import facebook from '@/assets/svgs/facebook.svg'
 import linkedin from '@/assets/svgs/linkedin.svg'
@@ -63,14 +62,6 @@ export default function Login() {
   return (
     <div className="lg:flex lg:justify-between">
       <div className="flex justify-center items-center lg:w-1/2 h-screen relative">
-        <div className="absolute top-2 left-2 flex items-center gap-3 opacity-60">
-          <img src={logo} alt="logo" />
-          <span className="text-xl font-bold">
-            REAL
-            <br />
-            ESTATE
-          </span>
-        </div>
         <form className="w-1/2 flex flex-col items-center" onSubmit={onSubmit}>
           <div className="text-center mb-4">
             <h2 className="text-3xl font-semibold mb-4">Sign In</h2>
@@ -113,7 +104,7 @@ export default function Login() {
             <p>
               Don't have an account?{' '}
               <br className="sm:hidden lg:block xl:hidden" />
-              <Link to="/signup" className="text-primary">
+              <Link to="/sign-up" className="text-primary">
                 Click here to sign up
               </Link>
             </p>
@@ -121,7 +112,7 @@ export default function Login() {
         </form>
       </div>
       <div className="hidden lg:block">
-        <img className="h-screen" src={signin} alt="background sign in" />
+        <img className="h-screen" src={signIn} alt="background sign in" />
       </div>
     </div>
   )

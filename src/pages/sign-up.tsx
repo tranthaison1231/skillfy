@@ -3,8 +3,7 @@ import { Input } from '@/components/ui/Input'
 import { Checkbox } from '@/components/ui/Checkbox'
 import { useToast } from '@/components/ui/use-toast'
 import { Link, useNavigate } from '@/router'
-import signUp from '@/assets/images/bg-sign-up.png'
-import logo from '@/assets/svgs/logo.svg'
+import signUp from '@/assets/images/bg-signup.png'
 import gmail from '@/assets/svgs/gmail.svg'
 import facebook from '@/assets/svgs/facebook.svg'
 import linkedin from '@/assets/svgs/linkedin.svg'
@@ -130,14 +129,6 @@ export default function Login() {
         <img className="h-screen" src={signUp} alt="background sign up" />
       </div>
       <div className="flex justify-center items-center xl:w-1/2 2xl:w-2/3 h-screen relative">
-        <div className="absolute top-2 right-2 flex items-center gap-3 opacity-60">
-          <img src={logo} alt="logo" />
-          <span className="text-xl font-bold">
-            REAL
-            <br />
-            ESTATE
-          </span>
-        </div>
         <form className="w-1/2 flex flex-col items-center" onSubmit={onSubmit}>
           <div className="text-center mb-4">
             <h2 className="text-3xl font-semibold mb-4">Sign Up</h2>

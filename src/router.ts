@@ -8,9 +8,11 @@ export type Path =
   | `/:id`
   | `/admin`
   | `/forgot-password`
+  | `/lock`
   | `/login`
   | `/search`
   | `/sign-up`
+  | `/success`
 
 export type Params = {
   '/:id': { id: string }

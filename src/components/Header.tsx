@@ -5,9 +5,9 @@ import { Link } from 'react-router-dom'
 function Header() {
   return (
     <div className="flex justify-between">
-      <div className="flex gap-16 flex-auto">
+      <div className="flex flex-auto gap-16">
         <img src={logo} alt="logo" />
-        <ul className="flex gap-6 w-full items-center">
+        <ul className="flex items-center w-full gap-6">
           <Link to="/">
             <li>Top offers</li>
           </Link>
@@ -25,8 +25,9 @@ function Header() {
           </Link>
         </ul>
       </div>
-
-      <Button>Contact Us </Button>
+      <Link to="/login">
+        <Button> Login </Button>
+      </Link>
     </div>
   )
 }
