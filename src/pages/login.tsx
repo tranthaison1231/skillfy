@@ -1,13 +1,16 @@
+import { signIn } from '@/apis/auth'
+import bgSignIn from '@/assets/images/bg-signin.png'
+import facebook from '@/assets/svgs/facebook.svg'
+import gmail from '@/assets/svgs/gmail.svg'
+import instagram from '@/assets/svgs/instagram.svg'
+import linkedin from '@/assets/svgs/linkedin.svg'
 import { Button } from '@/components/ui/Button'
-import { Input } from '@/components/ui/Input'
 import { Checkbox } from '@/components/ui/Checkbox'
+import { Input } from '@/components/ui/Input'
 import { useToast } from '@/components/ui/use-toast'
 import { Link, useNavigate } from '@/router'
-import signIn from '@/assets/images/bg-signin.png'
-import gmail from '@/assets/svgs/gmail.svg'
-import facebook from '@/assets/svgs/facebook.svg'
-import linkedin from '@/assets/svgs/linkedin.svg'
-import instagram from '@/assets/svgs/instagram.svg'
+import { validator } from '@/utils/validator'
+import { SubmitHandler, useForm } from 'react-hook-form'
 
 const socials = [
   {
@@ -32,28 +35,35 @@ const socials = [
   }
 ]
 
+interface Inputs {
+  email: string
+  password: string
+}
+
 export default function Login() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors }
+  } = useForm<Inputs>({
+    mode: 'onBlur',
+    defaultValues: {
+      email: 'admin@enouvo.com',
+      password: 'Enouvo@123'
+    }
+  })
   const navigate = useNavigate()
   const { toast } = useToast()
 
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    const data = new FormData(e.currentTarget)
-    const email = data.get('email')
-    const password = data.get('password')
-    const accounts = JSON.parse(localStorage.getItem('accounts'))
-    const checkAccount = accounts.some(account => {
-      return account.email === email && account.password === password
-    })
-
-    console.log(checkAccount)
-    if (checkAccount) {
-      localStorage.setItem('isAuth', 'true')
+  const onSubmit: SubmitHandler<Inputs> = async ({ email, password }) => {
+    try {
+      const res = await signIn(email, password)
+      localStorage.setItem('access_token', res.data.accessToken)
       navigate('/admin')
-    } else {
+    } catch (error) {
       toast({
         title: 'Error',
-        description: 'Email or password is incorrect',
+        description: error.response.data.message,
         variant: 'destructive'
       })
     }
@@ -62,23 +72,47 @@ export default function Login() {
   return (
     <div className="lg:flex lg:justify-between">
       <div className="flex justify-center items-center lg:w-1/2 h-screen relative">
-        <form className="w-1/2 flex flex-col items-center" onSubmit={onSubmit}>
+        <form
+          className="w-1/2 flex flex-col items-center"
+          onSubmit={handleSubmit(onSubmit)}
+        >
           <div className="text-center mb-4">
             <h2 className="text-3xl font-semibold mb-4">Sign In</h2>
             <p className="text-gray-400">Sign in to stay connected.</p>
           </div>
-          <label className="w-full">
+          <label className="w-full mb-4">
             <span className="text-gray-400">Email</span>
-            <Input placeholder="Email" className="mb-4" name="email" />
+            <Input
+              placeholder="Email"
+              {...register('email', {
+                required: 'Email is required',
+                pattern: {
+                  value: validator.email,
+                  message: 'Email must be valid'
+                }
+              })}
+            />
+            {errors.email && (
+              <p className="text-red-500 mt-1">{errors.email.message}</p>
+            )}
           </label>
-          <label className="w-full">
+          <label className="w-full mb-4">
             <span className="text-gray-400">Password</span>
             <Input
               placeholder="Password"
-              className="mb-4"
               type="password"
-              name="password"
+              {...register('password', {
+                required: 'Password is required',
+                pattern: {
+                  value: validator.password,
+                  message:
+                    'Password must contain at least 8 characters, 1 letter and 1 number'
+                }
+              })}
             />
+            {errors.password && (
+              <p className="text-red-500 mt-1">{errors.password.message}</p>
+            )}
           </label>
           <div className="flex justify-between w-full mb-6">
             <label className=" text-gray-400 ">
@@ -112,7 +146,7 @@ export default function Login() {
         </form>
       </div>
       <div className="hidden lg:block">
-        <img className="h-screen" src={signIn} alt="background sign in" />
+        <img className="h-screen" src={bgSignIn} alt="background sign in" />
       </div>
     </div>
   )
