@@ -10,7 +10,7 @@ export type Path =
   | `/forgot-password`
   | `/login`
   | `/search`
-  | `/signup`
+  | `/sign-up`
 
 export type Params = {
   '/:id': { id: string }

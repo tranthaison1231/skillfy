@@ -3,7 +3,7 @@ import { Input } from '@/components/ui/Input'
 import { Checkbox } from '@/components/ui/Checkbox'
 import { useToast } from '@/components/ui/use-toast'
 import { Link, useNavigate } from '@/router'
-import signup from '@/assets/images/bg-signup.png'
+import signUp from '@/assets/images/bg-sign-up.png'
 import logo from '@/assets/svgs/logo.svg'
 import gmail from '@/assets/svgs/gmail.svg'
 import facebook from '@/assets/svgs/facebook.svg'
@@ -127,7 +127,7 @@ export default function Login() {
   return (
     <div className="xl:flex xl:justify-between">
       <div className="hidden xl:block">
-        <img className="h-screen" src={signup} alt="background sign up" />
+        <img className="h-screen" src={signUp} alt="background sign up" />
       </div>
       <div className="flex justify-center items-center xl:w-1/2 2xl:w-2/3 h-screen relative">
         <div className="absolute top-2 right-2 flex items-center gap-3 opacity-60">
