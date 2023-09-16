@@ -1,21 +1,16 @@
 import React from 'react'
-import Avatar from '@/assets/images/avatar.png'
+import avatar from '@/assets/images/avatar.png'
 import bgLogo from '@/assets/images/bg-logo.png'
 import { Button } from '@/components/ui/Button'
 import { useNavigate } from '@/router'
-import Logo1 from '@/assets/svgs/logo-1.svg'
-import Background from '@/assets/images/bg-circle.png'
+import background from '@/assets/images/bg-circle.png'
 import { Input } from '@/components/ui/Input'
 import { useToast } from '@/components/ui/use-toast'
-const username = [
-  {
-    id: 1,
-    name: 'Austin Robertson'
-  }
-]
-export default function lock() {
+
+export default function Lock() {
   const navigate = useNavigate()
   const { toast } = useToast()
+
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     const data = new FormData(e.currentTarget)
@@ -36,6 +31,7 @@ export default function lock() {
       })
     }
   }
+
   return (
     <div className="flex items-center justify-center h-screen">
       <div className="z-0 opacity-70">
@@ -45,29 +41,18 @@ export default function lock() {
           className="absolute top-[-100px] left-[-195px]"
         />
       </div>
-      <div className="w-[40%] flex justify-start mr-auto">
+      <div className="w-2/5 flex justify-start mr-auto">
         <form
           onSubmit={onSubmit}
           className="flex flex-col items-center justify-center m-auto w-391"
         >
-          <div className="flex gap-2 mb-8 mr-auto">
-            <img src={Logo1} alt="logo" />
-            <div className="text-3xl font-normal leading-10 text-slate-800">
-              Hope Ui
-            </div>
-          </div>
           <div className="flex flex-col items-center justify-center m-auto w-[391px]">
-            <img src={Avatar} alt="avatar-user" className="flex w-100 h-100 " />
-            {username.map(user => (
-              <h1
-                className="text-3xl font-medium text-slate-800 "
-                key={user.id}
-              >
-                Hi ! {user.name}
-              </h1>
-            ))}
+            <img src={avatar} alt="avatar-user" className="flex w-100 h-100 " />
+            <h1 className="text-3xl font-medium text-slate-800 ">
+              Hi ! Austin Robertson
+            </h1>
             <p className="text-center text-gray-400 w-500 mb-7">
-              Enter your password to acess the admin.
+              Enter your password to access the admin.
             </p>
             <div className="">
               <label
@@ -93,7 +78,7 @@ export default function lock() {
       <div className="relative w-[60%] h-screen bg-gradient-to-br from-blue-500 to-blue-900 ">
         <img
           className="absolute top-0 h-screen m-0 ml-40 opacity-10 right 0"
-          src={Background}
+          src={background}
           alt="background"
         />
       </div>

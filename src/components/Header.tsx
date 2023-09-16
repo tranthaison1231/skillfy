@@ -25,8 +25,9 @@ function Header() {
           </Link>
         </ul>
       </div>
-
-      <Button>Contact Us </Button>
+      <Link to="/login">
+        <Button> Login </Button>
+      </Link>
     </div>
   )
 }
