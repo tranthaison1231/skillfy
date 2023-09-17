@@ -3,11 +3,14 @@ import { Input } from '@/components/ui/Input'
 import { Checkbox } from '@/components/ui/Checkbox'
 import { useToast } from '@/components/ui/use-toast'
 import { Link, useNavigate } from '@/router'
-import signUp from '@/assets/images/bg-signup.png'
+import bgSignUp from '@/assets/images/bg-signup.png'
 import gmail from '@/assets/svgs/gmail.svg'
 import facebook from '@/assets/svgs/facebook.svg'
 import linkedin from '@/assets/svgs/linkedin.svg'
 import instagram from '@/assets/svgs/instagram.svg'
+import { SubmitHandler, useForm } from 'react-hook-form'
+import { signUp } from '@/apis/auth'
+import { validator } from '@/utils/validator'
 
 const socials = [
   {
@@ -31,93 +34,48 @@ const socials = [
     link: 'https://www.linkedin.com/'
   }
 ]
-
-function isPasswordValid(password) {
-  const uppercaseRegex = /[A-Z]/
-  const lowercaseRegex = /[a-z]/
-  const digitRegex = /[0-9]/
-  return (
-    uppercaseRegex.test(password) &&
-    lowercaseRegex.test(password) &&
-    digitRegex.test(password)
-  )
+interface Inputs {
+  email: string
+  password: string
+  firstName: string
+  lastName: string
+  phone: string
+  confirmPassword: string
 }
-
 export default function Login() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors }
+  } = useForm<Inputs>({
+    mode: 'onBlur'
+  })
   const navigate = useNavigate()
   const { toast } = useToast()
 
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    const data = new FormData(e.currentTarget)
-    const user = {
-      fname: data.get('FName'),
-      lname: data.get('LName'),
-      email: data.get('email') as string,
-      phone: data.get('phone') as string,
-      password: data.get('password') as string
-    }
-
-    const checkbox = data.get('checkbox')
-    const confirmPassword = data.get('Cfpassword')
-    const checkPasswordValid = isPasswordValid(user.password)
-    const checkPassword = checkPasswordValid && user.password.length >= 8
-    const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/
-    const checkPhone = user.phone.length === 10
-
-    if (user.password && user.email && user.fname && user.lname && user.phone) {
-      const account = [user]
-      let accounts = JSON.parse(localStorage.getItem('accounts'))
-      const checkEmailExit = accounts.some(
-        account => account.email === user.email
+  const onSubmit: SubmitHandler<Inputs> = async ({
+    email,
+    password,
+    firstName,
+    lastName,
+    phone,
+    confirmPassword
+  }) => {
+    try {
+      const res = await signUp(
+        email,
+        password,
+        firstName,
+        lastName,
+        phone,
+        confirmPassword
       )
-
-      if (!emailPattern.test(user.email)) {
-        toast({
-          title: 'Error',
-          description: 'Email is incorrect',
-          variant: 'destructive'
-        })
-      } else if (!checkPhone) {
-        toast({
-          title: 'Error',
-          description: 'Phone is incorrect',
-          variant: 'destructive'
-        })
-      } else if (!checkPassword) {
-        toast({
-          title: 'Error',
-          description: 'Password have a-z, A-Z, 0-9 and min-length is 8',
-          variant: 'destructive'
-        })
-      } else if (user.password !== confirmPassword) {
-        toast({
-          title: 'Error',
-          description: 'Confirm password is incorrect',
-          variant: 'destructive'
-        })
-      } else if (checkEmailExit) {
-        toast({
-          title: 'Error',
-          description: 'Email is exit',
-          variant: 'destructive'
-        })
-      } else if (!checkbox) {
-        toast({
-          title: 'Error',
-          description: 'Check is agree',
-          variant: 'destructive'
-        })
-      } else {
-        accounts = accounts.concat(account)
-        const accountJSON = JSON.stringify(accounts)
-        localStorage.setItem('accounts', accountJSON)
-        navigate('/login')
-      }
-    } else {
+      localStorage.setItem('access_token', res.data.accessToken)
+      navigate('/sign-up')
+    } catch (error) {
       toast({
         title: 'Error',
-        description: 'Fill all information',
+        description: error.response.data.message,
         variant: 'destructive'
       })
     }
@@ -126,41 +84,122 @@ export default function Login() {
   return (
     <div className="xl:flex xl:justify-between">
       <div className="hidden xl:block">
-        <img className="h-screen" src={signUp} alt="background sign up" />
+        <img className="h-screen" src={bgSignUp} alt="background sign up" />
       </div>
-      <div className="flex justify-center items-center xl:w-1/2 2xl:w-2/3 h-screen relative">
-        <form className="w-1/2 flex flex-col items-center" onSubmit={onSubmit}>
-          <div className="text-center mb-4">
-            <h2 className="text-3xl font-semibold mb-4">Sign Up</h2>
+      <div className="relative flex items-center justify-center h-screen xl:w-1/2 2xl:w-2/3">
+        <form
+          className="flex flex-col items-center w-1/2"
+          onSubmit={handleSubmit(onSubmit)}
+        >
+          <div className="mb-4 text-center">
+            <h2 className="mb-4 text-3xl font-semibold">Sign Up</h2>
             <p className="text-gray-400">Create your Real Estate account</p>
           </div>
-          <div className="grid grid-cols-2 gap-4 w-full">
+          <div className="grid w-full grid-cols-2 gap-4">
             <label>
               <span className="text-gray-400">First Name</span>
-              <Input name="FName" />
+              <Input
+                placeholder="First Name"
+                {...register('firstName', {
+                  required: 'First Name is required',
+                  pattern: {
+                    value: validator.firstName,
+                    message: 'First Name must be valid'
+                  }
+                })}
+              />
+              {errors.firstName && (
+                <p className="mt-1 text-red-500">{errors.firstName.message}</p>
+              )}
             </label>
             <label>
               <span className="text-gray-400">Last Name</span>
-              <Input name="LName" />
+              <Input
+                placeholder="Last Name"
+                {...register('lastName', {
+                  required: 'Last Name is required',
+                  pattern: {
+                    value: validator.lastName,
+                    message: 'Last Name must be valid'
+                  }
+                })}
+              />
+              {errors.lastName && (
+                <p className="mt-1 text-red-500">{errors.lastName.message}</p>
+              )}
             </label>
             <label>
               <span className="text-gray-400">Email</span>
-              <Input name="email" />
+              <Input
+                placeholder="Email"
+                {...register('email', {
+                  required: 'Email is required',
+                  pattern: {
+                    value: validator.email,
+                    message: 'Email must be valid'
+                  }
+                })}
+              />
+              {errors.email && (
+                <p className="mt-1 text-red-500">{errors.email.message}</p>
+              )}
             </label>
             <label>
               <span className="text-gray-400">Phone No.</span>
-              <Input name="phone" />
+              <Input
+                placeholder="Phone"
+                {...register('phone', {
+                  required: 'Phone is required',
+                  pattern: {
+                    value: validator.phone,
+                    message: 'Phone must be valid'
+                  }
+                })}
+              />
+              {errors.phone && (
+                <p className="mt-1 text-red-500">{errors.phone.message}</p>
+              )}
             </label>
             <label>
               <span className="text-gray-400">Password</span>
-              <Input type="password" name="password" />
+              <Input
+                placeholder="Password"
+                type="password"
+                {...register('password', {
+                  required: 'Password is required',
+                  pattern: {
+                    value: validator.password,
+                    message:
+                      'Password must contain at least 8 characters, 1 letter and 1 number'
+                  }
+                })}
+              />
+              {errors.password && (
+                <p className="mt-1 text-red-500">{errors.password.message}</p>
+              )}
             </label>
             <label>
               <span className="text-gray-400">Confirm password</span>
-              <Input type="password" name="Cfpassword" />
+              <Input
+                placeholder="Confirm Password"
+                type="password"
+                {...register('confirmPassword', {
+                  required: 'confirmPassword is required',
+                  pattern: {
+                    value: validator.confirmPassword,
+                    message:
+                      'confirmPassword must contain at least 8 characters, 1 letter and 1 number'
+                  }
+                })}
+              />
+              {errors.confirmPassword && (
+                <p className="mt-1 text-red-500">
+                  {errors.confirmPassword.message}
+                </p>
+              )}
             </label>
           </div>
-          <label className=" text-gray-400 my-6">
+          <label className="my-6 text-gray-400 ">
             <Checkbox name="checkbox" />
             <span className="ml-2">I agree with the terms of use</span>
           </label>

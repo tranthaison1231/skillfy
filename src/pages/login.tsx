@@ -71,13 +71,13 @@ export default function Login() {
 
   return (
     <div className="lg:flex lg:justify-between">
-      <div className="flex justify-center items-center lg:w-1/2 h-screen relative">
+      <div className="relative flex items-center justify-center h-screen lg:w-1/2">
         <form
-          className="w-1/2 flex flex-col items-center"
+          className="flex flex-col items-center w-1/2"
           onSubmit={handleSubmit(onSubmit)}
         >
-          <div className="text-center mb-4">
-            <h2 className="text-3xl font-semibold mb-4">Sign In</h2>
+          <div className="mb-4 text-center">
+            <h2 className="mb-4 text-3xl font-semibold">Sign In</h2>
             <p className="text-gray-400">Sign in to stay connected.</p>
           </div>
           <label className="w-full mb-4">
@@ -93,7 +93,7 @@ export default function Login() {
               })}
             />
             {errors.email && (
-              <p className="text-red-500 mt-1">{errors.email.message}</p>
+              <p className="mt-1 text-red-500">{errors.email.message}</p>
             )}
           </label>
           <label className="w-full mb-4">
@@ -111,11 +111,11 @@ export default function Login() {
               })}
             />
             {errors.password && (
-              <p className="text-red-500 mt-1">{errors.password.message}</p>
+              <p className="mt-1 text-red-500">{errors.password.message}</p>
             )}
           </label>
           <div className="flex justify-between w-full mb-6">
-            <label className=" text-gray-400 ">
+            <label className="text-gray-400 ">
               <Checkbox />
               <span className="ml-2">Remember Me</span>
             </label>
