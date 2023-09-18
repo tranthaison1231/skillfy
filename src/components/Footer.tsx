@@ -5,13 +5,17 @@ import Plane from '@/assets/images/plane.png'
 function Footer() {
   return (
     <footer>
-      <div className="flex items-center justify-center gap-8 h-400 bg-secondary">
-        <img src={Plane} alt="Plane" className="mr-20" />
-        <div>
-          <h1 className="text-4xl font-bold leading-10">
+      <div className="flex flex-col items-center justify-center gap-8 md:flex-row h-530 bg-secondary">
+        <img
+          src={Plane}
+          alt="Plane"
+          className="flex items-center justify-center md:mr-20"
+        />
+        <div className="flex flex-col items-center justify-center mx-6 md:items-start md:mx-0">
+          <h1 className="sm:text-4xl text-2xl font-bold leading-10">
             Subscribe to newsletter
           </h1>
-          <p className="mb-4 text-xl leading-9">
+          <p className="mb-4 sm:text-xl text-sm leading-9 w-96 md:w-500">
             Get the latest news and interesting offers and real estate
           </p>
           <div className="flex w-2/3 gap-4">
