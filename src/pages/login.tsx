@@ -9,8 +9,10 @@ import { Checkbox } from '@/components/ui/Checkbox'
 import { Input } from '@/components/ui/Input'
 import { useToast } from '@/components/ui/use-toast'
 import { Link, useNavigate } from '@/router'
-import { validator } from '@/utils/validator'
+import { LoginSchema } from '@/utils/shema'
+import { zodResolver } from '@hookform/resolvers/zod'
 import { SubmitHandler, useForm } from 'react-hook-form'
+import * as z from 'zod'
 
 const socials = [
   {
@@ -35,18 +37,14 @@ const socials = [
   }
 ]
 
-interface Inputs {
-  email: string
-  password: string
-}
-
 export default function Login() {
   const {
     register,
     handleSubmit,
     formState: { errors }
-  } = useForm<Inputs>({
+  } = useForm({
     mode: 'onBlur',
+    resolver: zodResolver(LoginSchema),
     defaultValues: {
       email: 'admin@enouvo.com',
       password: 'Enouvo@123'
@@ -55,7 +53,10 @@ export default function Login() {
   const navigate = useNavigate()
   const { toast } = useToast()
 
-  const onSubmit: SubmitHandler<Inputs> = async ({ email, password }) => {
+  const onSubmit: SubmitHandler<z.infer<typeof LoginSchema>> = async ({
+    email,
+    password
+  }) => {
     try {
       const res = await signIn(email, password)
       localStorage.setItem('access_token', res.data.accessToken)
@@ -82,16 +83,7 @@ export default function Login() {
           </div>
           <label className="w-full mb-4">
             <span className="text-gray-400">Email</span>
-            <Input
-              placeholder="Email"
-              {...register('email', {
-                required: 'Email is required',
-                pattern: {
-                  value: validator.email,
-                  message: 'Email must be valid'
-                }
-              })}
-            />
+            <Input placeholder="Email" {...register('email')} />
             {errors.email && (
               <p className="mt-1 text-red-500">{errors.email.message}</p>
             )}
@@ -101,14 +93,7 @@ export default function Login() {
             <Input
               placeholder="Password"
               type="password"
-              {...register('password', {
-                required: 'Password is required',
-                pattern: {
-                  value: validator.password,
-                  message:
-                    'Password must contain at least 8 characters, 1 letter and 1 number'
-                }
-              })}
+              {...register('password')}
             />
             {errors.password && (
               <p className="mt-1 text-red-500">{errors.password.message}</p>

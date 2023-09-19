@@ -1,16 +1,18 @@
+import { signUp } from '@/apis/auth'
+import bgSignUp from '@/assets/images/bg-signup.png'
+import facebook from '@/assets/svgs/facebook.svg'
+import gmail from '@/assets/svgs/gmail.svg'
+import instagram from '@/assets/svgs/instagram.svg'
+import linkedin from '@/assets/svgs/linkedin.svg'
 import { Button } from '@/components/ui/Button'
-import { Input } from '@/components/ui/Input'
 import { Checkbox } from '@/components/ui/Checkbox'
+import { Input } from '@/components/ui/Input'
 import { useToast } from '@/components/ui/use-toast'
 import { Link, useNavigate } from '@/router'
-import bgSignUp from '@/assets/images/bg-signup.png'
-import gmail from '@/assets/svgs/gmail.svg'
-import facebook from '@/assets/svgs/facebook.svg'
-import linkedin from '@/assets/svgs/linkedin.svg'
-import instagram from '@/assets/svgs/instagram.svg'
+import { SignUpSchema } from '@/utils/shema'
+import { zodResolver } from '@hookform/resolvers/zod'
 import { SubmitHandler, useForm } from 'react-hook-form'
-import { signUp } from '@/apis/auth'
-import { validator } from '@/utils/validator'
+import * as z from 'zod'
 
 const socials = [
   {
@@ -34,32 +36,27 @@ const socials = [
     link: 'https://www.linkedin.com/'
   }
 ]
-interface Inputs {
-  email: string
-  password: string
-  firstName: string
-  lastName: string
-  phone: string
-  confirmPassword: string
-}
+
+type SignUpInputs = z.infer<typeof SignUpSchema>
+
 export default function Login() {
   const {
     register,
     handleSubmit,
     formState: { errors }
-  } = useForm<Inputs>({
+  } = useForm<SignUpInputs>({
+    resolver: zodResolver(SignUpSchema),
     mode: 'onBlur'
   })
   const navigate = useNavigate()
   const { toast } = useToast()
 
-  const onSubmit: SubmitHandler<Inputs> = async ({
+  const onSubmit: SubmitHandler<SignUpInputs> = async ({
     email,
     password,
     firstName,
     lastName,
-    phone,
-    confirmPassword
+    phoneNumber
   }) => {
     try {
       const res = await signUp(
@@ -67,11 +64,15 @@ export default function Login() {
         password,
         firstName,
         lastName,
-        phone,
-        confirmPassword
+        phoneNumber
       )
       localStorage.setItem('access_token', res.data.accessToken)
-      navigate('/sign-up')
+      toast({
+        variant: 'success',
+        title: 'Login Success',
+        description: res.data.message
+      })
+      navigate('/login')
     } catch (error) {
       toast({
         title: 'Error',
@@ -98,66 +99,32 @@ export default function Login() {
           <div className="grid w-full grid-cols-2 gap-4">
             <label>
               <span className="text-gray-400">First Name</span>
-              <Input
-                placeholder="First Name"
-                {...register('firstName', {
-                  required: 'First Name is required',
-                  pattern: {
-                    value: validator.firstName,
-                    message: 'First Name must be valid'
-                  }
-                })}
-              />
+              <Input placeholder="First Name" {...register('firstName')} />
               {errors.firstName && (
                 <p className="mt-1 text-red-500">{errors.firstName.message}</p>
               )}
             </label>
             <label>
               <span className="text-gray-400">Last Name</span>
-              <Input
-                placeholder="Last Name"
-                {...register('lastName', {
-                  required: 'Last Name is required',
-                  pattern: {
-                    value: validator.lastName,
-                    message: 'Last Name must be valid'
-                  }
-                })}
-              />
+              <Input placeholder="Last Name" {...register('lastName')} />
               {errors.lastName && (
                 <p className="mt-1 text-red-500">{errors.lastName.message}</p>
               )}
             </label>
             <label>
               <span className="text-gray-400">Email</span>
-              <Input
-                placeholder="Email"
-                {...register('email', {
-                  required: 'Email is required',
-                  pattern: {
-                    value: validator.email,
-                    message: 'Email must be valid'
-                  }
-                })}
-              />
+              <Input placeholder="Email" {...register('email')} />
               {errors.email && (
                 <p className="mt-1 text-red-500">{errors.email.message}</p>
               )}
             </label>
             <label>
               <span className="text-gray-400">Phone No.</span>
-              <Input
-                placeholder="Phone"
-                {...register('phone', {
-                  required: 'Phone is required',
-                  pattern: {
-                    value: validator.phone,
-                    message: 'Phone must be valid'
-                  }
-                })}
-              />
-              {errors.phone && (
-                <p className="mt-1 text-red-500">{errors.phone.message}</p>
+              <Input placeholder="Phone" {...register('phoneNumber')} />
+              {errors.phoneNumber && (
+                <p className="mt-1 text-red-500">
+                  {errors.phoneNumber.message}
+                </p>
               )}
             </label>
             <label>
@@ -165,14 +132,7 @@ export default function Login() {
               <Input
                 placeholder="Password"
                 type="password"
-                {...register('password', {
-                  required: 'Password is required',
-                  pattern: {
-                    value: validator.password,
-                    message:
-                      'Password must contain at least 8 characters, 1 letter and 1 number'
-                  }
-                })}
+                {...register('password')}
               />
               {errors.password && (
                 <p className="mt-1 text-red-500">{errors.password.message}</p>
@@ -183,14 +143,7 @@ export default function Login() {
               <Input
                 placeholder="Confirm Password"
                 type="password"
-                {...register('confirmPassword', {
-                  required: 'confirmPassword is required',
-                  pattern: {
-                    value: validator.confirmPassword,
-                    message:
-                      'confirmPassword must contain at least 8 characters, 1 letter and 1 number'
-                  }
-                })}
+                {...register('confirmPassword')}
               />
               {errors.confirmPassword && (
                 <p className="mt-1 text-red-500">

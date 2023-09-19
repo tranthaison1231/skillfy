@@ -6,21 +6,20 @@ export const signIn = async (email, password) => {
     password
   })
 }
+
 export const signUp = async (
   email,
   password,
   firstName,
   lastName,
-  phone,
-  confirmPassword
+  phoneNumber
 ) => {
   return request.post(`/sign-up`, {
     email,
     password,
     firstName,
     lastName,
-    phone,
-    confirmPassword
+    phoneNumber
   })
 }
 
