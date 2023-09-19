@@ -9,14 +9,14 @@ function Home() {
   return (
     <div>
       <Welcome className="mt-16" />
-      <div className="mt-16 mb-9 h-500" id="about-us">
+      <div className="mt-16 mb-9 md:h-500 h-850" id="about-us">
         <AboutUs />
       </div>
-      <div className="h-750" id="our-team">
-        <OurTeam></OurTeam>
+      <div className="h-[2100px] sm:h-1150 md:h-750" id="our-team">
+        <OurTeam />
       </div>
-      <div className="mt-8 h-570" id="references">
-        <References></References>
+      <div className="mt-8 sm:h-800 md:h-570 h-900" id="references">
+        <References />
       </div>
     </div>
   )

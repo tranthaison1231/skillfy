@@ -74,6 +74,9 @@ module.exports = {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out'
       },
+      bottom: {
+        120: '120px'
+      },
       height: {
         86: '86px',
         90: '90px',
@@ -84,10 +87,16 @@ module.exports = {
         500: '500px',
         530: '530px',
         570: '570px',
-        750: '750px'
+        750: '750px',
+        800: '800px',
+        850: '850px',
+        900: '900px',
+        1150: '1150px'
       },
       width: {
+        44: '44%',
         100: '100px',
+        322: '322px',
         352: '352px',
         391: '391px',
         500: '500px',
