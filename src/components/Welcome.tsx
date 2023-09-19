@@ -18,19 +18,23 @@ interface Props {
 
 export default function Welcome({ className }: Props) {
   return (
-    <div className={twMerge('flex gap-9 relative', className)}>
+    <div
+      className={twMerge(
+        'flex flex-col md:flex-row gap-9 relative mx-8 md:mx-0',
+        className
+      )}
+    >
       <div>
-        <h2 className="mb-2 text-6xl">
-          {' '}
+        <h2 className="mb-6 text-6xl md:mb-2">
           Modern living <br /> for everyone
         </h2>
-        <p>
+        <p className="">
           We provide a complete service for the sale, purchase or rental of real
           estate. We have been operating in Madrid and Barcelona more than 15
           years.
         </p>
       </div>
-      <div className="absolute bottom-10 flex gap-4 p-6 bg-[#F3F3FA] w-2/3">
+      <div className="absolute md:bottom-120 top-64 md:top-21 flex gap-4 p-6 bg-[#F3F3FA] w-full md:w-2/3">
         <Select>
           <SelectTrigger>
             <SelectValue placeholder="Property type" />
@@ -48,7 +52,7 @@ export default function Welcome({ className }: Props) {
         <Input type="email" placeholder="Search a location" icon={MapPin} />
         <Button> Search </Button>
       </div>
-      <img src={welcome} alt="welcome" className="w-1/2" />
+      <img src={welcome} alt="welcome" className="mt-36 md:mt-0 md:w-1/2" />
     </div>
   )
 }

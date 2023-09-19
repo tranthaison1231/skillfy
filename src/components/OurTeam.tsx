@@ -40,9 +40,11 @@ const users = [
 export default function OurTeam() {
   return (
     <div id="our-team" className="max-w-5xl mx-auto py-28">
-      <div className="flex flex-row-reverse flex-wrap items-center justify-between gap-y-10">
-        <div className="w-[30%]">
-          <h1 className="text-5xl font-bold leading-loose">Our Team</h1>
+      <div className="flex flex-col sm:justify-center mx-10 md:mx-0 sm:gap-8 md:gap-6 md:justify-between sm:flex-row flex-wrap items-center  md:flex-row-reverse gap-y-10">
+        <div className="sm:w-[30%] md:flex-wrap mx-6 sm:mx-11 md:mx-0">
+          <h1 className="md:text-5xl text-4xl sm:mb-6 md:mb-0 sm:text-4xl font-bold leading-loose">
+            Our Team
+          </h1>
           <p className="text-xl">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Purus
             rutrum donec ultricies cras id ac.
@@ -51,17 +53,17 @@ export default function OurTeam() {
         {users.map(user => (
           <div
             key={user.id}
-            className="w-[30%] flex justify-center border-lightgray border-[1px] rounded-sm shadow-xl"
+            className="md:w-[30%] sm:w-44 w-322 flex justify-center border-lightgray border-[1px] rounded-sm shadow-xl"
           >
             <div className="py-5 font-medium text-center">
-              <img src={user.image} alt="user" />
+              <img src={user.image} alt="user" className="" />
               <h2 className="mt-6 text-xl">{user.name}</h2>
-              <p className="mt-1 text-lg text-primary">{user.desc}</p>
+              <p className="mt-1 sm:text-lg text-primary">{user.desc}</p>
             </div>
           </div>
         ))}
       </div>
-      <div className="relative left-[44%] top-9 h-4 w-28">
+      <div className="relative md:left-[44%] left-[38%] top-9 h-4 w-28">
         <div className="absolute top-0 left-0 w-4 h-4 rounded-full bg-zinc-200" />
         <div className="w-4 h-4 left-[32px] top-0 absolute bg-zinc-200 rounded-full" />
         <div className="w-4 h-4 left-[64px] top-0 absolute bg-blue-900 rounded-full" />

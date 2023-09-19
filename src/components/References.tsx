@@ -16,18 +16,18 @@ const descriptionReferences = [
 ]
 export default function References() {
   return (
-    <div id="references" className="max-w-5xl mx-auto my-44">
-      <div className="w-1/2">
-        <h1 className="text-5xl font-bold leading-[69px] text-lightgray">
+    <div id="references" className="mx-8 md:max-w-5xl md:mx-auto my-44">
+      <div className="md:w-1/2 ">
+        <h1 className="sm:text-5xl text-4xl font-bold leading-[69px] text-lightgray">
           References
         </h1>
-        <p className="w-611 text-lightgray">
+        <p className="md:w-611 text-lightgray">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit.
           <br />
           Purus rutrum donec ultricies cras id ac.
         </p>
       </div>
-      <div className="flex gap-8 mt-10">
+      <div className="flex flex-col gap-8 mt-10 md:flex-row">
         {descriptionReferences.map(ref => (
           <div key={ref.name} className="p-6 bg-secondary">
             <div className="flex items-start gap-3">
@@ -41,7 +41,7 @@ export default function References() {
           </div>
         ))}
       </div>
-      <div className="relative left-[44%] top-9 h-4 w-28">
+      <div className="relative md:left-[44%] left-[38%] top-9 h-4 w-28">
         <div className="absolute top-0 left-0 w-4 h-4 rounded-full bg-zinc-200" />
         <div className="w-4 h-4 left-[32px] top-0 absolute bg-zinc-200 rounded-full" />
         <div className="w-4 h-4 left-[64px] top-0 absolute bg-blue-900 rounded-full" />
