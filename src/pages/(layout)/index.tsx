@@ -13,10 +13,10 @@ function Home() {
         <AboutUs />
       </div>
       <div className="h-[2100px] sm:h-1150 md:h-750" id="our-team">
-        <OurTeam></OurTeam>
+        <OurTeam />
       </div>
       <div className="mt-8 sm:h-800 md:h-570 h-900" id="references">
-        <References></References>
+        <References />
       </div>
     </div>
   )

@@ -6,8 +6,8 @@ import { Toaster } from './components/ui/Toaster'
 const root = createRoot(document.getElementById('root'))
 
 root.render(
-  <>
+  <div>
     <Routes />
     <Toaster />
-  </>
+  </div>
 )
