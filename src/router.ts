@@ -7,6 +7,8 @@ export type Path =
   | `/`
   | `/:id`
   | `/admin`
+  | `/admin/edit-user`
+  | `/admin/user-list`
   | `/admin/users`
   | `/forgot-password`
   | `/lock`
