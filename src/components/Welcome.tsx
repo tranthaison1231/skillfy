@@ -34,7 +34,7 @@ export default function Welcome({ className }: Props) {
           years.
         </p>
       </div>
-      <div className="absolute md:bottom-120 top-64 md:top-21 flex gap-4 p-6 bg-[#F3F3FA] w-full md:w-2/3">
+      <div className="absolute md:bottom-30 top-64 md:top-21 flex gap-4 p-6 bg-[#F3F3FA] w-full md:w-2/3">
         <Select>
           <SelectTrigger>
             <SelectValue placeholder="Property type" />

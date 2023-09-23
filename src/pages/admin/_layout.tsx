@@ -23,7 +23,6 @@ function Layout() {
     <div>
       <Header user={user} />
       <Outlet />
-      <div> Footer </div>
     </div>
   )
 }

@@ -16,7 +16,7 @@ export default function Success() {
       </div>
       <div className="flex flex-col items-center justify-center m-auto w-[50%]">
         <div className="flex flex-col items-center justify-center m-auto ">
-          <img src={success} alt="Success" className="flex w-86 h-90 " />
+          <img src={success} alt="Success" className="flex w-86 h-23" />
           <h1 className="text-blue-800 text-6xl font-bold ">Success !</h1>
           <p className="w-1/2 text-center text-slate-800 mb-7">
             A email has been send to your email@domain.com. Please check for an
