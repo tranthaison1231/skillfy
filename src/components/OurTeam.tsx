@@ -53,7 +53,7 @@ export default function OurTeam() {
         {users.map(user => (
           <div
             key={user.id}
-            className="md:w-[30%] sm:w-44 w-322 flex justify-center border-lightgray border-[1px] rounded-sm shadow-xl"
+            className="md:w-2/6 sm:w-2/5 w-322 flex justify-center border-lightgray border-[1px] rounded-sm shadow-xl"
           >
             <div className="py-5 font-medium text-center">
               <img src={user.image} alt="user" className="" />

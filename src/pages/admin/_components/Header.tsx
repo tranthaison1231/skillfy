@@ -1,9 +1,10 @@
 import { Input } from '@/components/ui/Input'
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/Avatar'
 import { Search } from 'lucide-react'
 import Logo from '@/assets/svgs/logo-1.svg'
-import arrowLeft from '@/assets/svgs/Arrowleft.svg'
+import arrowLeft from '@/assets/svgs/arrow-left.svg'
 import { Link } from 'react-router-dom'
+
 interface User {
   email: string
   avatarURL: string

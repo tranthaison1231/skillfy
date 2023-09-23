@@ -2,6 +2,7 @@ import { Button } from '@/components/ui/Button'
 import SideBar from './_components/SideBar'
 import logo from '@/assets/svgs/logo-1.svg'
 import Circle from '@/assets/images/big-circle.png'
+
 const adminList = [
   {
     id: 1,
@@ -36,6 +37,7 @@ const adminList = [
     totals: '$2.888.00'
   }
 ]
+
 function Admin() {
   return (
     <div className="flex">
@@ -53,7 +55,7 @@ function Admin() {
             projects for free.
           </p>
         </div>
-        <div className="z-[-1] top-0 h-234 w-full absolute bg-blue-500 rounded-bl-2xl rounded-br-2xl"></div>
+        <div className="z-[-1] top-0 h-59 w-full absolute bg-blue-500 rounded-bl-2xl rounded-br-2xl"></div>
         <div className="w-4/5 mx-auto mb-16">
           <div className="flex justify-between">
             <div className="flex flex-col">

@@ -5,7 +5,6 @@ import { components, hooks, utils } from '@generouted/react-router/client'
 
 export type Path =
   | `/`
-  | `/:id`
   | `/admin`
   | `/admin/edit-user`
   | `/admin/user-list`
@@ -13,12 +12,13 @@ export type Path =
   | `/forgot-password`
   | `/lock`
   | `/login`
+  | `/rooms/:id`
   | `/search`
   | `/sign-up`
   | `/success`
 
 export type Params = {
-  '/:id': { id: string }
+  '/rooms/:id': { id: string }
 }
 
 export type ModalPath = never
