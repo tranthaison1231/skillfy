@@ -39,7 +39,7 @@ export default function SearchInOffers() {
       </div>
       <div className="grid grid-cols-3 gap-3">
         {rooms.map(room => (
-          <Link to={`/${room.id}`} key={room.id} className="no-underline">
+          <Link to={`/rooms/${room.id}`} key={room.id} className="no-underline">
             <div className="shadow-xl p-2 cursor-pointer">
               <h2>{room.name}</h2>
               <img src={room.image} className="w-full" />
