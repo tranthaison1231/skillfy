@@ -21,7 +21,7 @@ export default function References() {
         <h1 className="sm:text-5xl text-4xl font-bold leading-[69px] text-lightgray">
           References
         </h1>
-        <p className="md:w-611 text-lightgray">
+        <p className="md:w-153 text-lightgray">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit.
           <br />
           Purus rutrum donec ultricies cras id ac.
@@ -43,9 +43,9 @@ export default function References() {
       </div>
       <div className="relative md:left-[44%] left-[38%] top-9 h-4 w-28">
         <div className="absolute top-0 left-0 w-4 h-4 rounded-full bg-zinc-200" />
-        <div className="w-4 h-4 left-[32px] top-0 absolute bg-zinc-200 rounded-full" />
-        <div className="w-4 h-4 left-[64px] top-0 absolute bg-blue-900 rounded-full" />
-        <div className="w-4 h-4 left-[96px] top-0 absolute bg-zinc-200 rounded-full" />
+        <div className="absolute top-0 w-4 h-4 rounded-full left-8 bg-zinc-200" />
+        <div className="absolute top-0 w-4 h-4 bg-blue-900 rounded-full left-16" />
+        <div className="absolute top-0 w-4 h-4 rounded-full left-24 bg-zinc-200" />
       </div>
     </div>
   )

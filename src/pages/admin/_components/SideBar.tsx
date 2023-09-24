@@ -41,10 +41,10 @@ export default function SideBar() {
   const navigate = useNavigate()
 
   return (
-    <div className="w-1/5 h-screen px-8 py-2">
+    <div className="w-[277px] h-screen px-8 py-2">
       {SIDER_BAR.map(sidebar => (
         <div key={sidebar.label}>
-          <h1 className="text-gray-400 mb-4 font font-semibold">
+          <h1 className="mb-4 font-semibold text-gray-400 font">
             {sidebar.label}
           </h1>
           <div className="pl-3">
@@ -52,7 +52,7 @@ export default function SideBar() {
               return item.children?.length > 0 ? (
                 <div
                   key={item.label}
-                  className="hover:bg-primary  text-gray-400 pl-3 rounded-md w-60 hover:text-white flex h-11 items-center cursor-pointer gap-4"
+                  className="flex items-center gap-4 pl-3 text-gray-400 rounded-md cursor-pointer hover:bg-primary w-60 hover:text-white h-11"
                 >
                   {item.icon}
                   <h1>{item.label}</h1>

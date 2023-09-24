@@ -39,13 +39,13 @@ const adminList = [
 
 function Dashboard() {
   return (
-    <div className="relative w-4/5 z-[-2]  h-1500 bg-[#E9ECEF]">
+    <div className="relative w-full z-[-2]  h-375 bg-[#E9ECEF]">
       <img
         src={Circle}
         alt="Circle"
-        className="absolute top-0 h-48 opacity-30"
+        className="absolute top-0 w-full h-48 opacity-30"
       />
-      <div className="z-10 flex flex-col mt-16 mb-24 ml-10 w-911">
+      <div className="z-10 flex flex-col mt-16 mb-24 ml-10 w-228">
         <h1 className="text-4xl font-bold text-white">Hello Devs !</h1>
         <p className="text-2xl text-white">
           We are on a mission to help developers like you to build beautiful
@@ -132,7 +132,7 @@ function Dashboard() {
       <Button className="flex mx-auto mt-10 bg-[#3A57E8] px-6 py-2">
         Print
       </Button>
-      <div className="bg-white rounded-lg shadow w-[90%] z-[-1] h-1250 absolute top-48 left-[61px]"></div>
+      <div className="bg-white rounded-lg shadow w-[90%] z-[-1] h-313 absolute top-48 left-[61px]"></div>
     </div>
   )
 }

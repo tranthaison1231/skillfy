@@ -11,13 +11,13 @@ export default function Success() {
         <img
           src={bgLogo}
           alt="backgroundColor"
-          className="absolute top-0 w-500 h-400 left-[29%]"
+          className="absolute top-0 w-125 h-100 left-[29%]"
         />
       </div>
       <div className="flex flex-col items-center justify-center m-auto w-[50%]">
         <div className="flex flex-col items-center justify-center m-auto ">
           <img src={success} alt="Success" className="flex w-86 h-23" />
-          <h1 className="text-blue-800 text-6xl font-bold ">Success !</h1>
+          <h1 className="text-6xl font-bold text-blue-800 ">Success !</h1>
           <p className="w-1/2 text-center text-slate-800 mb-7">
             A email has been send to your email@domain.com. Please check for an
             email from company and click on the included link to reset your
@@ -30,9 +30,9 @@ export default function Success() {
           </Link>
         </div>
       </div>
-      <div className="z-20 relative w-1/2 h-screen bg-gradient-to-br from-blue-500 to-blue-900 ">
+      <div className="relative z-20 w-1/2 h-screen bg-gradient-to-br from-blue-500 to-blue-900 ">
         <img
-          className="absolute w-1000 top-[-80px] h-screen m-0 opacity-10 right 0"
+          className="absolute w-250 top-[-80px] h-screen m-0 opacity-10 right-0"
           src={background}
           alt="background"
         />

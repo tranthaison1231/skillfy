@@ -41,29 +41,29 @@ export default function Lock() {
           className="absolute top-[-100px] left-[-195px]"
         />
       </div>
-      <div className="w-2/5 flex justify-start mr-auto">
+      <div className="flex justify-start w-2/5 mr-auto">
         <form
           onSubmit={onSubmit}
-          className="flex flex-col items-center justify-center m-auto w-391"
+          className="flex flex-col items-center justify-center m-auto w-98"
         >
           <div className="flex flex-col items-center justify-center m-auto w-[391px]">
             <img src={avatar} alt="avatar-user" className="flex w-100 h-100 " />
             <h1 className="text-3xl font-medium text-slate-800 ">
               Hi ! Austin Robertson
             </h1>
-            <p className="text-center text-gray-400 w-500 mb-7">
+            <p className="text-center text-gray-400 w-125 mb-7">
               Enter your password to access the admin.
             </p>
             <div className="">
               <label
                 htmlFor="password"
-                className="flex mb-2 text-gray-400 cursor-pointer w-100"
+                className="flex mb-2 text-gray-400 cursor-pointer w-25"
               >
                 Password
               </label>
               <Input
                 placeholder="Password"
-                className="mb-8 w-352"
+                className="mb-8 w-88"
                 type="password"
                 id="password"
                 name="password"

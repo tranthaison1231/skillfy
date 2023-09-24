@@ -40,9 +40,9 @@ const users = [
 export default function OurTeam() {
   return (
     <div id="our-team" className="max-w-5xl mx-auto py-28">
-      <div className="flex flex-col sm:justify-center mx-10 md:mx-0 sm:gap-8 md:gap-6 md:justify-between sm:flex-row flex-wrap items-center  md:flex-row-reverse gap-y-10">
+      <div className="flex flex-col flex-wrap items-center mx-10 sm:justify-center md:mx-0 sm:gap-8 md:gap-6 md:justify-between sm:flex-row md:flex-row-reverse gap-y-10">
         <div className="sm:w-[30%] md:flex-wrap mx-6 sm:mx-11 md:mx-0">
-          <h1 className="md:text-5xl text-4xl sm:mb-6 md:mb-0 sm:text-4xl font-bold leading-loose">
+          <h1 className="text-4xl font-bold leading-loose md:text-5xl sm:mb-6 md:mb-0 sm:text-4xl">
             Our Team
           </h1>
           <p className="text-xl">
@@ -53,7 +53,7 @@ export default function OurTeam() {
         {users.map(user => (
           <div
             key={user.id}
-            className="md:w-2/6 sm:w-2/5 w-322 flex justify-center border-lightgray border-[1px] rounded-sm shadow-xl"
+            className="md:w-2/6 sm:w-2/5 w-81 flex justify-center border-lightgray border-[1px] rounded-sm shadow-xl"
           >
             <div className="py-5 font-medium text-center">
               <img src={user.image} alt="user" className="" />
@@ -65,9 +65,9 @@ export default function OurTeam() {
       </div>
       <div className="relative md:left-[44%] left-[38%] top-9 h-4 w-28">
         <div className="absolute top-0 left-0 w-4 h-4 rounded-full bg-zinc-200" />
-        <div className="w-4 h-4 left-[32px] top-0 absolute bg-zinc-200 rounded-full" />
-        <div className="w-4 h-4 left-[64px] top-0 absolute bg-blue-900 rounded-full" />
-        <div className="w-4 h-4 left-[96px] top-0 absolute bg-zinc-200 rounded-full" />
+        <div className="absolute top-0 w-4 h-4 rounded-full left-8 bg-zinc-200" />
+        <div className="absolute top-0 w-4 h-4 bg-blue-900 rounded-full left-16" />
+        <div className="absolute top-0 w-4 h-4 rounded-full left-24 bg-zinc-200" />
       </div>
     </div>
   )
