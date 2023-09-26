@@ -6,6 +6,7 @@ import Header from './_components/Header'
 import SideBar from './_components/SideBar'
 
 function Layout() {
+  const [isToggler, setIsToggler] = useState(false)
   const [user, setUser] = useState({
     email: '',
     avatarURL: '',
@@ -20,12 +21,23 @@ function Layout() {
     }
     fetchProfile()
   }, [])
+
+  const onToggle = () => {
+    setIsToggler(isToggler => !isToggler)
+  }
+
   return (
     <div>
-      <Header user={user} />
+      <Header user={user} isToggler={isToggler} onToggle={onToggle} />
       <div className="flex">
-        <SideBar />
-        <Outlet />
+        <SideBar isToggler={isToggler} />
+        <div
+          className={
+            isToggler ? 'w-[calc(100%-17.5rem)]' : 'w-[calc(100%-6rem)]'
+          }
+        >
+          <Outlet />
+        </div>
       </div>
     </div>
   )

@@ -1,6 +1,6 @@
 import Circle from '@/assets/images/big-circle.png'
 import logo from '@/assets/svgs/logo-1.svg'
-import { Button } from '@/components/ui/Button'
+import { Button } from '@/components/Button'
 
 const adminList = [
   {
@@ -39,12 +39,8 @@ const adminList = [
 
 function Dashboard() {
   return (
-    <div className="relative w-full z-[-2]  h-375 bg-[#E9ECEF]">
-      <img
-        src={Circle}
-        alt="Circle"
-        className="absolute top-0 w-full h-48 opacity-30"
-      />
+    <div className="bg-[#E9ECEF]">
+      <img src={Circle} alt="Circle" className="top-0 w-full h-48 opacity-30" />
       <div className="z-10 flex flex-col mt-16 mb-24 ml-10 w-228">
         <h1 className="text-4xl font-bold text-white">Hello Devs !</h1>
         <p className="text-2xl text-white">
@@ -52,7 +48,7 @@ function Dashboard() {
           projects for free.
         </p>
       </div>
-      <div className="z-[-1] top-0 h-59 w-full absolute bg-blue-500 rounded-bl-2xl rounded-br-2xl"></div>
+      <div className="z-[-1] top-0 h-59 w-full bg-blue-500 rounded-bl-2xl rounded-br-2xl"></div>
       <div className="w-4/5 mx-auto mb-16">
         <div className="flex justify-between">
           <div className="flex flex-col">
@@ -132,7 +128,7 @@ function Dashboard() {
       <Button className="flex mx-auto mt-10 bg-[#3A57E8] px-6 py-2">
         Print
       </Button>
-      <div className="bg-white rounded-lg shadow w-[90%] z-[-1] h-313 absolute top-48 left-[61px]"></div>
+      <div className="bg-white rounded-lg shadow w-[90%] z-[-1] h-313 absolute top-48"></div>
     </div>
   )
 }

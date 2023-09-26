@@ -40,8 +40,8 @@ const users = [
 export default function OurTeam() {
   return (
     <div id="our-team" className="max-w-5xl mx-auto py-28">
-      <div className="flex flex-col flex-wrap items-center mx-10 sm:justify-center md:mx-0 sm:gap-8 md:gap-6 md:justify-between sm:flex-row md:flex-row-reverse gap-y-10">
-        <div className="sm:w-[30%] md:flex-wrap mx-6 sm:mx-11 md:mx-0">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 mx-10 md:mx-0 sm:gap-8 md:gap-6 gap-y-10">
+        <div className="md:flex-wrap sm:mx-11 md:mx-0">
           <h1 className="text-4xl font-bold leading-loose md:text-5xl sm:mb-6 md:mb-0 sm:text-4xl">
             Our Team
           </h1>
@@ -53,7 +53,7 @@ export default function OurTeam() {
         {users.map(user => (
           <div
             key={user.id}
-            className="md:w-2/6 sm:w-2/5 w-81 flex justify-center border-lightgray border-[1px] rounded-sm shadow-xl"
+            className="w-full flex justify-center border-lightgray border-[1px] rounded-sm shadow-xl"
           >
             <div className="py-5 font-medium text-center">
               <img src={user.image} alt="user" className="" />

@@ -1,7 +1,7 @@
 import background from '@/assets/images/bg-circle-2.png'
 import success from '@/assets/images/success.png'
 import bgLogo from '@/assets/images/bg-logo.png'
-import { Button } from '@/components/ui/Button'
+import { Button } from '@/components/Button'
 import { Link } from '@/router'
 
 export default function Success() {

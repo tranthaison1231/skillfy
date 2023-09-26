@@ -1,11 +1,11 @@
 import React from 'react'
 import avatar from '@/assets/images/avatar.png'
 import bgLogo from '@/assets/images/bg-logo.png'
-import { Button } from '@/components/ui/Button'
+import { Button } from '@/components/Button'
 import { useNavigate } from '@/router'
 import background from '@/assets/images/bg-circle.png'
-import { Input } from '@/components/ui/Input'
-import { useToast } from '@/components/ui/use-toast'
+import { Input } from '@/components/Input'
+import { useToast } from '@/components/use-toast'
 
 export default function Lock() {
   const navigate = useNavigate()

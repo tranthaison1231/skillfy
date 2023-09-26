@@ -1,6 +1,5 @@
-import arrowLeft from '@/assets/svgs/arrow-left.svg'
 import Logo from '@/assets/svgs/logo-1.svg'
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/Avatar'
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/Avatar'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -9,15 +8,16 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger
-} from '@/components/ui/DropdownMenu'
-import { Input } from '@/components/ui/Input'
+} from '@/components/DropdownMenu'
+import { Input } from '@/components/Input'
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger
-} from '@/components/ui/Tooltip'
-import { LogOut, Search } from 'lucide-react'
+} from '@/components/Tooltip'
+import clsx from 'clsx'
+import { ArrowLeft, ArrowRight, LogOut, Search } from 'lucide-react'
 import { Link, useNavigate } from 'react-router-dom'
 
 interface User {
@@ -29,9 +29,11 @@ interface User {
 
 interface Props {
   user: User
+  isToggler: boolean
+  onToggle: () => void
 }
 
-export default function Header({ user }: Props) {
+export default function Header({ user, isToggler, onToggle }: Props) {
   const navigate = useNavigate()
 
   const logout = () => {
@@ -40,20 +42,36 @@ export default function Header({ user }: Props) {
   }
 
   return (
-    <div className="flex px-8 py-4">
-      <div className="w-1/5 ">
-        <div className="flex items-center font-medium">
+    <div className="flex">
+      <div
+        className={clsx('border-b py-4 px-4', {
+          'w-70': isToggler,
+          'w-24': !isToggler
+        })}
+      >
+        <div className="flex items-center font-medium relative">
           <Link to="/" className="flex gap-3">
             <img src={Logo} alt="logo" />
-            <h1 className="text-4xl">Hope Ui</h1>
+            {isToggler && <h1 className="text-4xl">Hope Ui</h1>}
           </Link>
-          <div className="flex items-center justify-center bg-blue-600 rounded-full h-7 w-7 ml-7">
-            <img src={arrowLeft} alt="" />
+          <div
+            onClick={onToggle}
+            className="bg-primary hover:scale-105 rounded-full flex justify-center items-center h-7 w-7 absolute -right-6 cursor-pointer"
+          >
+            {isToggler ? (
+              <ArrowLeft className="text-white" />
+            ) : (
+              <ArrowRight className="text-white" />
+            )}
           </div>
         </div>
-        <div className="w-52 mt-3 h-[1px] bg-[#E9ECEF]"></div>
       </div>
-      <div className="flex justify-around w-4/5 ml-auto">
+      <div
+        className={clsx('flex justify-between py-4 px-4', {
+          'w-[calc(100%-17.5rem)]': isToggler,
+          'w-[calc(100%-6rem)]': !isToggler
+        })}
+      >
         <Input icon={Search} placeholder="Search" className="w-64" />
         <TooltipProvider>
           <Tooltip>

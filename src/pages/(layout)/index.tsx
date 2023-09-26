@@ -1,8 +1,8 @@
 import useScrollWhenHashChange from '@/hooks/useScrollWhenHashChange'
-import Welcome from '@/components/Welcome'
-import AboutUs from '@/components/AboutUs'
-import OurTeam from '@/components/OurTeam'
-import References from '@/components/References'
+import Welcome from './_components/Welcome'
+import AboutUs from './_components/AboutUs'
+import OurTeam from './_components/OurTeam'
+import References from './_components/References'
 function Home() {
   useScrollWhenHashChange()
 

@@ -1,7 +1,7 @@
 import welcome from '@/assets/images/welcome.png'
 import { twMerge } from 'tailwind-merge'
-import { Button } from './ui/Button'
-import { Input } from './ui/Input'
+import { Button } from '@/components/Button'
+import { Input } from '@/components/Input'
 import {
   Select,
   SelectContent,
@@ -9,7 +9,7 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue
-} from './ui/Select'
+} from '@/components/Select'
 import { MapPin } from 'lucide-react'
 
 interface Props {

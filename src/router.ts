@@ -11,6 +11,8 @@ export type Path =
   | `/admin/menu-styles`
   | `/admin/user-list`
   | `/admin/users`
+  | `/admin/users/edit`
+  | `/admin/users/profile`
   | `/forgot-password`
   | `/lock`
   | `/login`

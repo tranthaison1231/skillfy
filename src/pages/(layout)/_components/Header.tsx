@@ -1,9 +1,9 @@
-import { Button } from '@/components/ui/Button'
+import { Button } from '@/components/Button'
 import logo from '@/assets/svgs/logo.svg'
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
 import bugger from '@/assets/icon/hambeger.png'
-import Drawer from './ui/Drawer'
+import Drawer from '@/components/Drawer'
 
 function Header() {
   const [isToggler, setIsToggler] = useState(false)

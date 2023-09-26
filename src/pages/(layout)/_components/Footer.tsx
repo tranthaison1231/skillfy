@@ -1,7 +1,7 @@
 import logoFooter from '@/assets/images/bg-footer.png'
-import { Input } from './ui/Input'
-import { Button } from './ui/Button'
 import Plane from '@/assets/images/plane.png'
+import { Button } from '@/components/Button'
+import { Input } from '@/components/Input'
 function Footer() {
   return (
     <footer>
