@@ -51,7 +51,7 @@ export default function Header({ user }: Props) {
             <img src={arrowLeft} alt="" />
           </div>
         </div>
-        <div className="w-205 mt-3 h-[1px] bg-[#E9ECEF]"></div>
+        <div className="w-52 mt-3 h-[1px] bg-[#E9ECEF]"></div>
       </div>
       <div className="flex justify-around w-4/5 ml-auto">
         <Input icon={Search} placeholder="Search" className="w-64" />
@@ -83,7 +83,7 @@ export default function Header({ user }: Props) {
                       onClick={logout}
                       className="cursor-pointer"
                     >
-                      <LogOut className="mr-2 h-4 w-4" />
+                      <LogOut className="w-4 h-4 mr-2" />
                       <span>Log out</span>
                     </DropdownMenuItem>
                   </DropdownMenuGroup>

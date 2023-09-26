@@ -16,7 +16,7 @@ function Header() {
     <div className="flex items-center justify-between">
       <div className="flex flex-auto gap-16 mx-8 md:mx-0 md:flex">
         <img src={logo} alt="logo" className="" />
-        <ul className="hidden md:gap-6  md:flex md:items-center">
+        <ul className="hidden md:gap-6 md:flex md:items-center">
           <Link to="/">
             <li>Top offers</li>
           </Link>

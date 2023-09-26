@@ -4,13 +4,13 @@ export default function AboutUs() {
     <div className="2xl:px-220 2xl:mt-250 lg:mt-200 lg:flex lg:px-7 sm:mt-180 mt-200">
       <div className="flex flex-col items-center justify-center mt-16 mb-16 md:flex-row">
         <div className="ml-1 md:ml-10">
-          <img src={About} alt="About" className="sm:w-530 h-470 w-96" />
+          <img src={About} alt="About" className="sm:w-133 h-118 w-96" />
         </div>
         <div className="md:ml-24">
-          <h1 className="mb-4 mt-9 md:mt-0 text-5xl font-bold w-352 h-14 sm:mb-0 text-lightgray">
+          <h1 className="mb-4 text-5xl font-bold mt-9 md:mt-0 w-88 h-14 sm:mb-0 text-lightgray">
             About us
           </h1>
-          <p className="text-lg md:w-352 w-96 h-447 text-lightgray">
+          <p className="text-lg md:w-88 w-96 h-112 text-lightgray">
             We are a company that connects the world of real estate and finance.
             We provide a complete service for the sale, purchase or rental of
             real estate. Our advantage is more than 15 years of experience and
