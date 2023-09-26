@@ -14,7 +14,7 @@ export default function Success() {
           className="absolute top-0 w-125 h-100 left-[29%]"
         />
       </div>
-      <div className="flex flex-col items-center justify-center m-auto w-[50%]">
+      <div className="flex flex-col items-center justify-center m-auto w-2/4">
         <div className="flex flex-col items-center justify-center m-auto ">
           <img src={success} alt="Success" className="flex w-86 h-23" />
           <h1 className="text-6xl font-bold text-blue-800 ">Success !</h1>

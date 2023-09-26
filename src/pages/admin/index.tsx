@@ -86,10 +86,10 @@ function Dashboard() {
             <span className="leading-7 text-zinc-950">{item.title}</span>
             <span className="leading-7 w-96 text-zinc-950">{item.desc}</span>
           </div>
-          <div className="flex justify-between w-1/2">
-            <span className="leading-7 text-zinc-950">{item.quality}</span>
-            <span className="leading-7 text-zinc-950">{item.price}</span>
-            <span className="leading-7 text-zinc-950">{item.totals}</span>
+          <div className="flex justify-between w-1/2 text-zinc-950">
+            <span className="leading-7 ">{item.quality}</span>
+            <span className="leading-7 ">{item.price}</span>
+            <span className="leading-7 ">{item.totals}</span>
           </div>
         </div>
       ))}

@@ -12,7 +12,7 @@ function Home() {
       <div className="mt-16 mb-9 md:h-125 h-213" id="about-us">
         <AboutUs />
       </div>
-      <div className="h-[2100px] sm:h-288 md:h-288" id="our-team">
+      <div className="h-525 sm:h-288 md:h-288" id="our-team">
         <OurTeam />
       </div>
       <div className="mt-8 sm:h-200 md:h-143 h-225" id="references">

@@ -46,7 +46,7 @@ export default function Lock() {
           onSubmit={onSubmit}
           className="flex flex-col items-center justify-center m-auto w-98"
         >
-          <div className="flex flex-col items-center justify-center m-auto w-[391px]">
+          <div className="flex flex-col items-center justify-center m-auto w-98">
             <img src={avatar} alt="avatar-user" className="flex w-100 h-100 " />
             <h1 className="text-3xl font-medium text-slate-800 ">
               Hi ! Austin Robertson

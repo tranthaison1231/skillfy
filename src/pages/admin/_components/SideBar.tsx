@@ -41,7 +41,7 @@ export default function SideBar() {
   const navigate = useNavigate()
 
   return (
-    <div className="w-[277px] h-screen px-8 py-2">
+    <div className="w-70 h-screen px-8 py-2">
       {SIDER_BAR.map(sidebar => (
         <div key={sidebar.label}>
           <h1 className="mb-4 font-semibold text-gray-400 font">
