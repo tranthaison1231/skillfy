@@ -1,0 +1,11 @@
+.rbc-toolbar-label {
+  font-size: 28px;
+  color: #000000;
+  font-weight: 600;
+}
+.rbc-toolbar {
+  margin: 24px 16px;
+}
+.rbc-off-range-bg {
+  background-color: #e9ecef;
+}

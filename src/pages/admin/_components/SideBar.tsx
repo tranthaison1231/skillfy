@@ -1,6 +1,7 @@
 import { useLocation, useNavigate } from 'react-router-dom'
 import {
   BookmarkMinus,
+  Calendar,
   ChevronRight,
   Edit,
   LayoutDashboard,
@@ -88,6 +89,16 @@ const SIDER_BAR = [
             href: '/admin/edit-user'
           }
         ]
+      }
+    ]
+  },
+  {
+    label: 'Elements',
+    items: [
+      {
+        label: 'Calendar',
+        icon: <Calendar />,
+        href: '/admin/calendar'
       }
     ]
   }
