@@ -76,4 +76,10 @@
   body {
     @apply bg-background text-foreground;
   }
+  .rbc-event-content {
+    color: red;
+  }
+  .rbc-toolbar-label {
+    color: red;
+  }
 }
