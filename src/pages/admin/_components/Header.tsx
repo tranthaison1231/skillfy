@@ -42,9 +42,9 @@ export default function Header({ user, isToggler, onToggle }: Props) {
   }
 
   return (
-    <div className="flex">
+    <div className="flex shadow-sm">
       <div
-        className={clsx('border-b py-4 px-4', {
+        className={clsx('py-4 px-4', {
           'w-70': isToggler,
           'w-24': !isToggler
         })}

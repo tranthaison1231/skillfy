@@ -103,7 +103,7 @@ export default function SideBar({ isToggler }: Props) {
 
   return (
     <div
-      className={clsx(' h-screen px-2 py-2 space-y-5', {
+      className={clsx(' h-screen px-2 py-2 space-y-5 shadow-md', {
         'w-70': isToggler,
         'w-24': !isToggler
       })}
@@ -117,7 +117,7 @@ export default function SideBar({ isToggler }: Props) {
                 <AccordionItem key={item.label} value={item.label}>
                   <AccordionTrigger
                     className={cn(
-                      '[&[data-state=open]>svg]:rotate-90 justify-between flex items-center gap-4 pl-3 text-gray-400 rounded-md cursor-pointer hover:bg-primary w-full hover:text-white h-11',
+                      '[&[data-state=open]>svg]:rotate-90 justify-between flex items-center gap-4 p-3 text-gray-400 rounded-md cursor-pointer hover:bg-primary w-full hover:text-white h-11',
                       {
                         'bg-primary text-white': location.pathname.includes(
                           item.href
@@ -137,7 +137,7 @@ export default function SideBar({ isToggler }: Props) {
                         onClick={() => navigate(child.href)}
                         key={child.label}
                         className={cn(
-                          'hover:bg-primary my-1 text-gray-400 pl-3 rounded-md w-full hover:text-white flex h-11 items-center cursor-pointer gap-4',
+                          'hover:bg-primary my-1 text-gray-400 p-3 rounded-md w-full hover:text-white flex h-11 items-center cursor-pointer gap-4',
                           {
                             'bg-primary text-white':
                               child.href === location.pathname
