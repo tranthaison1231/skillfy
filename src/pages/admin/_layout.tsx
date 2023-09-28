@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { Outlet } from 'react-router-dom'
 import Header from './_components/Header'
 import SideBar from './_components/SideBar'
+import Footer from './_components/Footer'
 
 function Layout() {
   const [isToggler, setIsToggler] = useState(false)
@@ -37,6 +38,7 @@ function Layout() {
           }
         >
           <Outlet />
+          <Footer />
         </div>
       </div>
     </div>
