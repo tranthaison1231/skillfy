@@ -1,4 +1,11 @@
-import { useLocation, useNavigate } from 'react-router-dom'
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem
+} from '@/components/Accordion'
+import { cn } from '@/lib/utils'
+import { AccordionTrigger } from '@radix-ui/react-accordion'
+import clsx from 'clsx'
 import {
   BookmarkMinus,
   ChevronRight,
@@ -6,16 +13,10 @@ import {
   LayoutDashboard,
   Settings2,
   ShieldCheck,
-  User
+  User,
+  Users
 } from 'lucide-react'
-import { cn } from '@/lib/utils'
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem
-} from '@/components/Accordion'
-import { AccordionTrigger } from '@radix-ui/react-accordion'
-import clsx from 'clsx'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 const SIDER_BAR = [
   {
@@ -62,6 +63,11 @@ const SIDER_BAR = [
         href: '/admin/users',
         children: [
           {
+            label: 'User List',
+            icon: <Users />,
+            href: '/admin/users/'
+          },
+          {
             label: 'User Profile',
             icon: <User />,
             href: '/admin/users/profile'
@@ -103,7 +109,7 @@ export default function SideBar({ isToggler }: Props) {
 
   return (
     <div
-      className={clsx(' h-screen px-2 py-2 space-y-5 shadow-md', {
+      className={clsx('h-[calc(100vh-78px)] px-2 py-2 space-y-5 shadow-md', {
         'w-70': isToggler,
         'w-24': !isToggler
       })}

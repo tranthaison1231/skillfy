@@ -5,6 +5,7 @@ import { Outlet } from 'react-router-dom'
 import Header from './_components/Header'
 import SideBar from './_components/SideBar'
 import Footer from './_components/Footer'
+import { cn } from '@/lib/utils'
 
 function Layout() {
   const [isToggler, setIsToggler] = useState(false)
@@ -33,9 +34,13 @@ function Layout() {
       <div className="flex">
         <SideBar isToggler={isToggler} />
         <div
-          className={
-            isToggler ? 'w-[calc(100%-17.5rem)]' : 'w-[calc(100%-6rem)]'
-          }
+          className={cn(
+            'h-[calc(100vh-78px)] flex flex-col justify-between bg-gray-100 overflow-y-auto',
+            {
+              'w-[calc(100%-17.5rem)]': isToggler,
+              'w-[calc(100%-6rem)]': !isToggler
+            }
+          )}
         >
           <Outlet />
           <Footer />

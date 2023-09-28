@@ -13,7 +13,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       <div className="relative w-full">
         {icon &&
           React.createElement(icon, {
-            className: 'absolute left-3 top-2 text-muted-foreground'
+            className: 'absolute left-3 w-4 top-2 text-muted-foreground'
           })}
         <input
           type={type}
