@@ -35,7 +35,7 @@ const columns = [
   },
   {
     header: () => <div className="text-center">Action</div>,
-    accessorKey: 'id',
+    accessorKey: 'action',
     cell: () => (
       <div className="flex gap-2 justify-center">
         <Button variant="outline" className="h-8 w-8 p-0">
@@ -62,7 +62,7 @@ export default function User() {
       }
     }
     fetchUsers()
-  })
+  }, [])
 
   return (
     <Card className="p-10 m-10 space-y-5">
