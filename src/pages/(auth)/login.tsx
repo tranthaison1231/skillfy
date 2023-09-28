@@ -10,6 +10,7 @@ import { Input } from '@/components/Input'
 import { useToast } from '@/components/use-toast'
 import { Link, useNavigate } from '@/router'
 import { LoginSchema } from '@/utils/shema'
+import { setToken } from '@/utils/token'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import * as z from 'zod'
@@ -59,7 +60,7 @@ export default function Login() {
   }) => {
     try {
       const res = await signIn(email, password)
-      localStorage.setItem('access_token', res.data.accessToken)
+      setToken(res.data.accessToken)
       navigate('/admin')
     } catch (error) {
       toast({

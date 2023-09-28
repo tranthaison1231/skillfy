@@ -1,7 +1,8 @@
+import { getToken } from '@/utils/token'
 import { Outlet, Navigate } from 'react-router-dom'
 
 export default function Layout() {
-  if (localStorage.getItem('access_token')) {
+  if (getToken()) {
     return <Navigate to="/admin" />
   }
   return <Outlet />

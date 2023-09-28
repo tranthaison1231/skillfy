@@ -33,7 +33,6 @@ export function DataTable<TData, TValue>({
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel()
   })
-  console.log(table.getHeaderGroups())
   return (
     <>
       <Table className={className}>
