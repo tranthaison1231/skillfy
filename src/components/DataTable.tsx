@@ -3,6 +3,7 @@ import {
   flexRender,
   getCoreRowModel,
   getPaginationRowModel,
+  getSortedRowModel,
   useReactTable
 } from '@tanstack/react-table'
 
@@ -20,18 +21,32 @@ interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
   data: TData[]
   className?: string
+  total?: number
+  size?: number
+  page?: number
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
-  className
+  className,
+  total,
+  size = 5,
+  page = 0
 }: DataTableProps<TData, TValue>) {
   const table = useReactTable({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
-    getPaginationRowModel: getPaginationRowModel()
+    getPaginationRowModel: getPaginationRowModel(),
+    getSortedRowModel: getSortedRowModel(),
+    pageCount: total,
+    initialState: {
+      pagination: {
+        pageSize: size,
+        pageIndex: page
+      }
+    }
   })
   return (
     <>
