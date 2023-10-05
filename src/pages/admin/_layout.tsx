@@ -8,6 +8,7 @@ import Footer from './_components/Footer'
 import { cn } from '@/lib/utils'
 
 function Layout() {
+  const [isLoading, setIsLoading] = useState(true)
   const [isToggler, setIsToggler] = useState(false)
   const [user, setUser] = useState({
     email: '',
@@ -18,8 +19,15 @@ function Layout() {
 
   useEffect(() => {
     const fetchProfile = async () => {
-      const res = await getProfile()
-      setUser(res.data.user)
+      try {
+        setIsLoading(true)
+        const res = await getProfile()
+        setUser(res.data.user)
+      } catch (error) {
+        console.error(error)
+      } finally {
+        setIsLoading(false)
+      }
     }
     fetchProfile()
   }, [])
@@ -30,7 +38,12 @@ function Layout() {
 
   return (
     <div>
-      <Header user={user} isToggler={isToggler} onToggle={onToggle} />
+      <Header
+        loading={isLoading}
+        user={user}
+        isToggler={isToggler}
+        onToggle={onToggle}
+      />
       <div className="flex">
         <SideBar isToggler={isToggler} />
         <div

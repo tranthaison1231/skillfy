@@ -1,4 +1,4 @@
-import { getUsers } from '@/apis/users'
+import { User } from '@/apis/users'
 import {
   Select,
   SelectContent,
@@ -8,22 +8,13 @@ import {
   SelectValue
 } from '@/components/Select'
 import { SelectProps } from '@radix-ui/react-select'
-import { useEffect, useState } from 'react'
+import { useQueryClient } from 'react-query'
 
 export default function UserSelector({ value, onValueChange }: SelectProps) {
-  const [users, setUsers] = useState([])
+  const queryClient = useQueryClient()
 
-  useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        const data = await getUsers()
-        setUsers(data)
-      } catch (error) {
-        console.error(error)
-      }
-    }
-    fetchUsers()
-  }, [])
+  const data = queryClient.getQueryData<{ data: User[] }>('users')
+
   return (
     <Select value={value} onValueChange={onValueChange}>
       <SelectTrigger className="w-40" onValueChange={onValueChange}>
@@ -31,7 +22,7 @@ export default function UserSelector({ value, onValueChange }: SelectProps) {
       </SelectTrigger>
       <SelectContent>
         <SelectGroup>
-          {users.map(user => (
+          {data?.data?.map(user => (
             <SelectItem key={user.id} value={user.id}>
               {user.name}
             </SelectItem>

@@ -42,3 +42,8 @@ request.interceptors.response.use(
     return Promise.reject(error)
   }
 )
+
+export const mockRequest = axios.create({
+  baseURL: 'https://64106f42be7258e14529c12f.mockapi.io/',
+  timeout: 30000
+})

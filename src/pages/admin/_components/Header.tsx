@@ -10,6 +10,7 @@ import {
   DropdownMenuTrigger
 } from '@/components/DropdownMenu'
 import { Input } from '@/components/Input'
+import { Skeleton } from '@/components/Skeleton'
 import {
   Tooltip,
   TooltipContent,
@@ -31,9 +32,10 @@ interface Props {
   user: User
   isToggler: boolean
   onToggle: () => void
+  loading?: boolean
 }
 
-export default function Header({ user, isToggler, onToggle }: Props) {
+export default function Header({ user, loading, isToggler, onToggle }: Props) {
   const navigate = useNavigate()
 
   const logout = () => {
@@ -73,24 +75,37 @@ export default function Header({ user, isToggler, onToggle }: Props) {
         })}
       >
         <Input icon={Search} placeholder="Search" className="w-64" />
+
         <TooltipProvider>
           <Tooltip>
             <TooltipTrigger>
               <DropdownMenu>
                 <DropdownMenuTrigger>
                   <div className="flex space-x-4">
-                    <Avatar>
-                      <AvatarImage src={user.avatarURL} alt="@shadcn" />
-                      <AvatarFallback>{user.firstName}</AvatarFallback>
-                    </Avatar>
-                    <div className="w-max">
-                      <h2 className="text-slate-800">
-                        {user.firstName + ' ' + user.lastName}
-                      </h2>
-                      <p className="text-xs text-gray-400">
-                        Marketing Administrator
-                      </p>
-                    </div>
+                    {loading ? (
+                      <>
+                        <Skeleton className="h-12 w-12 rounded-full" />
+                        <div className="w-max space-y-2">
+                          <Skeleton className="h-4" />
+                          <Skeleton className="h-4" />
+                        </div>
+                      </>
+                    ) : (
+                      <>
+                        <Avatar>
+                          <AvatarImage src={user.avatarURL} alt="@shadcn" />
+                          <AvatarFallback>{user.firstName}</AvatarFallback>
+                        </Avatar>
+                        <div className="w-max">
+                          <h2 className="text-slate-800">
+                            {user.firstName + ' ' + user.lastName}
+                          </h2>
+                          <p className="text-xs text-gray-400">
+                            Marketing Administrator
+                          </p>
+                        </div>
+                      </>
+                    )}
                   </div>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent className="w-56">

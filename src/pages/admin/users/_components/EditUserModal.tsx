@@ -1,25 +1,26 @@
+import { User } from '@/apis/users'
 import { Button } from '@/components/Button'
 import {
   Dialog,
   DialogContent,
   DialogFooter,
   DialogHeader,
-  DialogTitle,
-  DialogTrigger
+  DialogTitle
 } from '@/components/Dialog'
 import { Input } from '@/components/Input'
-import { Plus } from 'lucide-react'
 import { useForm } from 'react-hook-form'
 
 interface Props {
   onSubmit: (data) => void
   onClose: () => void
   isOpen: boolean
-  onOpen: () => void
-  loading: boolean
+  onOpen?: () => void
+  loading?: boolean
+  user?: User
 }
 
-export default function CreateUserModal({
+export default function EditUserModal({
+  user,
   onSubmit,
   onClose,
   isOpen,
@@ -28,14 +29,7 @@ export default function CreateUserModal({
 }: Props) {
   const { register, handleSubmit } = useForm({
     mode: 'onBlur',
-    defaultValues: {
-      name: '',
-      username: '',
-      email: '',
-      phoneNumber: '',
-      country: '',
-      avatar: ''
-    }
+    defaultValues: user
   })
 
   return (
@@ -49,16 +43,10 @@ export default function CreateUserModal({
         }
       }}
     >
-      <DialogTrigger asChild>
-        <Button variant="outline">
-          <Plus />
-          Create User
-        </Button>
-      </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <form onSubmit={handleSubmit(onSubmit)}>
           <DialogHeader>
-            <DialogTitle>Create User</DialogTitle>
+            <DialogTitle>Edit User</DialogTitle>
           </DialogHeader>
           <div className="grid gap-4 py-4">
             <label htmlFor="name">Name</label>
