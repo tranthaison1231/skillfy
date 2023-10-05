@@ -8,7 +8,16 @@ export default function Edit() {
 
   return (
     <div className="p-2 bg-gray-200 flex">
-      <DatePicker value={date} onChange={setDate} />
+      <DatePicker
+        selected={date}
+        onSelect={date => setDate(date)}
+        mode="single"
+        disabled={[
+          {
+            after: new Date()
+          }
+        ]}
+      />
       <MultiSelect
         selected={selected}
         onChange={setSelected}

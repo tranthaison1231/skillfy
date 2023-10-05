@@ -12,6 +12,7 @@ import { Link, useNavigate } from '@/router'
 import { LoginSchema } from '@/utils/shema'
 import { setToken } from '@/utils/token'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import * as z from 'zod'
 
@@ -39,6 +40,7 @@ const socials = [
 ]
 
 export default function Login() {
+  const [isLoading, setIsLoading] = useState(false)
   const {
     register,
     handleSubmit,
@@ -59,6 +61,7 @@ export default function Login() {
     password
   }) => {
     try {
+      setIsLoading(true)
       const res = await signIn(email, password)
       setToken(res.data.accessToken)
       navigate('/admin')
@@ -68,6 +71,8 @@ export default function Login() {
         description: error.response.data.message,
         variant: 'destructive'
       })
+    } finally {
+      setIsLoading(false)
     }
   }
 
@@ -109,7 +114,7 @@ export default function Login() {
               Forgot Password
             </Link>
           </div>
-          <Button className="w-48" type="submit">
+          <Button className="w-48" type="submit" isLoading={isLoading}>
             Sign In
           </Button>
           <div className="mt-4 text-center">
