@@ -77,6 +77,9 @@ export default function Login() {
     } catch (error) {
       toast({
         title: 'Error',
+
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
         description: error.response.data.message,
         variant: 'destructive'
       })

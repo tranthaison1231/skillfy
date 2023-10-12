@@ -10,7 +10,7 @@ export default function Edit() {
     <div className="p-2 bg-gray-200 flex">
       <DatePicker
         selected={date}
-        onSelect={date => setDate(date)}
+        onSelect={date => date && setDate(date)}
         mode="single"
         disabled={[
           {

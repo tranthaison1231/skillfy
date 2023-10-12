@@ -3,7 +3,7 @@ import fitnessZones from '../assets/svgs/fitness-zones.svg'
 import equipment from '../assets/svgs/equipment.svg'
 import time from '../assets/svgs/time.svg'
 import { useEffect, useState } from 'react'
-import { fetchReasons } from '../apis/reasons'
+import { fetchReasons } from '@/apis/reasons'
 
 const Icon = {
   line: line,

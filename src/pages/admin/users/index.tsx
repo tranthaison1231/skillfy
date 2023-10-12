@@ -26,7 +26,9 @@ export default function User() {
   const [search, setSearch] = useSearchParamsState('search', '')
   const [modal, setModal] = useState(false)
   const [user, setUser] = useState<User>()
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [page, setPage] = useState(0)
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [limit, setLimit] = useState(5)
 
   const { data: users, isLoading } = useQuery<{ data: User[] }>(

@@ -1,5 +1,5 @@
-import React from 'react'
 import Reference from '@/assets/svgs/ref.svg'
+
 const descriptionReferences = [
   {
     id: 1,

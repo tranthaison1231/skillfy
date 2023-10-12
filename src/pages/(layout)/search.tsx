@@ -4,9 +4,17 @@ import { Search } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 
+interface Room {
+  id: string
+  name: string
+  address: string
+  image: string
+  price: number
+}
+
 export default function SearchInOffers() {
   const inputRef = useRef<HTMLInputElement>(null)
-  const [rooms, setRooms] = useState([])
+  const [rooms, setRooms] = useState<Room[]>([])
   const [search, setSearch] = useState('')
 
   const handleSearch = () => {

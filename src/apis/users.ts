@@ -31,6 +31,8 @@ export const fetchUser = async ({
   })
 }
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 export const createUser = async user => {
   return mockRequest.post('/users', user)
 }

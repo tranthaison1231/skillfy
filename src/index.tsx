@@ -4,7 +4,7 @@ import { QueryClient, QueryClientProvider } from 'react-query'
 import { Toaster } from './components/Toaster'
 import './style.css'
 
-const root = createRoot(document.getElementById('root'))
+const root = createRoot(document.getElementById('root')!)
 
 const queryClient = new QueryClient({
   defaultOptions: {
