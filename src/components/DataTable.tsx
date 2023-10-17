@@ -14,8 +14,9 @@ import {
   TableHeader,
   TableRow
 } from '@/components/Table'
-import { Loader2 } from 'lucide-react'
+import { Loader2, PackageOpen } from 'lucide-react'
 import { Pagination } from './Pagination'
+import { cn } from '@/lib/utils'
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
@@ -49,8 +50,13 @@ export function DataTable<TData, TValue>({
   })
   return (
     <>
-      <Table className={className}>
-        <TableHeader>
+      <Table className={cn('relative', className)}>
+        {loading && (
+          <div className="absolute top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2  z-20 ">
+            <Loader2 className="w-10 h-10 text-primary animate-spin" />
+          </div>
+        )}
+        <TableHeader className={cn({ 'opacity-30': loading })}>
           {table.getHeaderGroups().map(headerGroup => (
             <TableRow key={headerGroup.id}>
               {headerGroup.headers.map(header => {
@@ -68,20 +74,8 @@ export function DataTable<TData, TValue>({
             </TableRow>
           ))}
         </TableHeader>
-        <TableBody>
+        <TableBody className={cn('h-80', { 'opacity-30': loading })}>
           {(() => {
-            if (loading) {
-              return (
-                <TableRow>
-                  <TableCell
-                    colSpan={columns.length}
-                    className="h-60 text-center animate-spin"
-                  >
-                    <Loader2 className="inline w-10 h-10 text-muted-foreground" />
-                  </TableCell>
-                </TableRow>
-              )
-            }
             if (table.getRowModel().rows?.length) {
               return table.getRowModel().rows.map(row => (
                 <TableRow
@@ -103,9 +97,10 @@ export function DataTable<TData, TValue>({
               <TableRow>
                 <TableCell
                   colSpan={columns.length}
-                  className="h-24 text-center"
+                  className="text-lg text-center gap-4 text-muted-foreground space-y-3"
                 >
-                  No results.
+                  <PackageOpen width={48} height={48} className="m-auto" />
+                  <p>No results.</p>
                 </TableCell>
               </TableRow>
             )

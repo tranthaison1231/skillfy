@@ -1,3 +1,4 @@
+import { presignedUrl } from '@/apis/upload'
 import { Button } from '@/components/Button'
 import {
   Dialog,
@@ -8,8 +9,12 @@ import {
   DialogTrigger
 } from '@/components/Dialog'
 import { Input } from '@/components/Input'
+import UploadButton from '@/components/UploadButton'
+import axios from 'axios'
 import { Plus } from 'lucide-react'
+import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
+import { toast } from 'sonner'
 
 interface Props {
   onSubmit: (data) => void
@@ -26,13 +31,44 @@ export default function CreateCompanyModal({
   onOpen,
   loading
 }: Props) {
-  const { register, handleSubmit } = useForm({
+  const { register, handleSubmit, reset, clearErrors } = useForm({
     mode: 'onBlur',
     defaultValues: {
       name: '',
       logo: ''
     }
   })
+
+  useEffect(() => {
+    if (!isOpen) {
+      reset()
+    }
+  }, [isOpen])
+
+  const onUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    try {
+      clearErrors('logo')
+      const file = e.target.files?.[0]
+      if (!file) return
+      const formData = new FormData()
+      formData.append('file', file)
+      const { data } = await presignedUrl({
+        fileName: file.name,
+        type: file.type
+      })
+      const res = await axios({
+        url: data.uploadUrl,
+        method: 'PUT',
+        data: formData,
+        headers: {
+          'Content-Type': file.type
+        }
+      })
+      console.log(res)
+    } catch (error) {
+      toast.error('Upload fail!')
+    }
+  }
 
   return (
     <Dialog
@@ -60,7 +96,12 @@ export default function CreateCompanyModal({
             <label htmlFor="name">Name</label>
             <Input id="name" {...register('name')} />
             <label htmlFor="logo">Logo</label>
-            <Input id="logo" {...register('logo')} />
+            <UploadButton
+              id="logo"
+              accept="image/*"
+              {...register('logo')}
+              onChange={onUpload}
+            />
           </div>
           <DialogFooter>
             <Button type="submit" isLoading={loading}>

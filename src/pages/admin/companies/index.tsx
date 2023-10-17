@@ -1,5 +1,9 @@
-import { Company, createCompany, getCompanies } from '@/apis/companies'
-import { deleteUser } from '@/apis/users'
+import {
+  Company,
+  createCompany,
+  deleteCompany,
+  getCompanies
+} from '@/apis/companies'
 import { Avatar, AvatarImage } from '@/components/Avatar'
 import { Button } from '@/components/Button'
 import { Card, CardTitle } from '@/components/Card'
@@ -43,6 +47,13 @@ export default function User() {
     }
   })
 
+  const deleteCompanyMutation = useMutation(deleteCompany, {
+    onSuccess: () => {
+      queryClient.invalidateQueries('companies')
+      toast.success('Deleted successfully!')
+    }
+  })
+
   const pagination = useMemo(
     () => ({
       pageIndex,
@@ -50,13 +61,6 @@ export default function User() {
     }),
     [pageIndex, pageSize]
   )
-
-  const deleteUserMutation = useMutation(deleteUser, {
-    onSuccess: () => {
-      queryClient.invalidateQueries('companies')
-      toast.success('Deleted successfully!')
-    }
-  })
 
   const columns = useMemo(
     () => [
@@ -88,7 +92,7 @@ export default function User() {
               variant="outline"
               className="h-8 w-8 p-0"
               onClick={() => {
-                deleteUserMutation.mutateAsync(column.row.original.id)
+                deleteCompanyMutation.mutateAsync(column.row.original.id)
               }}
             >
               <Trash className="cursor-pointer text-red-500" />
@@ -145,7 +149,7 @@ export default function User() {
         pagination={pagination}
         onPaginationChange={setPagination}
         total={companies?.data?.total ?? 0}
-        loading={isLoading}
+        loading={isLoading || deleteCompanyMutation.isLoading}
         className="mt-4"
         data={companies?.data?.items ?? []}
         columns={columns}
