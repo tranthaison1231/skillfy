@@ -7,6 +7,7 @@ export type Path =
   | `/`
   | `/admin`
   | `/admin/authentication`
+  | `/admin/companies`
   | `/admin/edit-user`
   | `/admin/menu-styles`
   | `/admin/user-list`

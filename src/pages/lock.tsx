@@ -5,11 +5,10 @@ import { Button } from '@/components/Button'
 import { useNavigate } from '@/router'
 import background from '@/assets/images/bg-circle.png'
 import { Input } from '@/components/Input'
-import { useToast } from '@/components/use-toast'
+import { toast } from 'sonner'
 
 export default function Lock() {
   const navigate = useNavigate()
-  const { toast } = useToast()
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -18,17 +17,9 @@ export default function Lock() {
     if (password === '123456') {
       localStorage.setItem('isAuth', 'true')
       navigate('/')
-      toast({
-        title: 'Successfully!',
-        description: 'Login successfully',
-        variant: 'success'
-      })
+      toast.success('Login successfully')
     } else {
-      toast({
-        title: 'Error',
-        description: 'Email or password is incorrect',
-        variant: 'destructive'
-      })
+      toast.error('Email or password is incorrect')
     }
   }
 

@@ -1,4 +1,5 @@
-import { deleteUser, editUser, getUsers, type User } from '@/apis/users'
+import { Company, createCompany, getCompanies } from '@/apis/companies'
+import { deleteUser } from '@/apis/users'
 import { Avatar, AvatarImage } from '@/components/Avatar'
 import { Button } from '@/components/Button'
 import { Card, CardTitle } from '@/components/Card'
@@ -12,30 +13,35 @@ import { Edit, FileDown, FileUp, Search, Trash } from 'lucide-react'
 import { useMemo, useState } from 'react'
 import { useMutation, useQuery, useQueryClient } from 'react-query'
 import { toast } from 'sonner'
-import CountrySelector from './_components/CountrySelector'
-import EditUserModal from './_components/EditUserModal'
+import CreateCompanyModal from './_components/CreateCompanyModal'
 
 export default function User() {
+  const [modal, setModal] = useState(false)
   const queryClient = useQueryClient()
-  const [country, setCountry] = useSearchParamsState('country', '')
   const [search, setSearch] = useSearchParamsState('search', '')
-  const [user, setUser] = useState<User>()
   const [{ pageIndex, pageSize }, setPagination] =
     usePersistState<PaginationState>({
       pageIndex: 0,
       pageSize: 10
     })
 
-  const { data: users, isLoading } = useQuery(
-    ['users', { search, country, pageIndex, pageSize }],
+  const { data: companies, isLoading } = useQuery(
+    ['companies', { search, pageIndex, pageSize }],
     () =>
-      getUsers({
+      getCompanies({
         search,
-        country,
         page: pageIndex,
         limit: pageSize
       })
   )
+
+  const createCompanyMutation = useMutation(createCompany, {
+    onSuccess: () => {
+      queryClient.invalidateQueries('companies')
+      toast.success('Created successfully!')
+      setModal(false)
+    }
+  })
 
   const pagination = useMemo(
     () => ({
@@ -47,66 +53,28 @@ export default function User() {
 
   const deleteUserMutation = useMutation(deleteUser, {
     onSuccess: () => {
-      queryClient.invalidateQueries('users')
+      queryClient.invalidateQueries('companies')
       toast.success('Deleted successfully!')
-    }
-  })
-
-  const editUserMutation = useMutation(editUser, {
-    onSuccess: () => {
-      queryClient.invalidateQueries('users')
     }
   })
 
   const columns = useMemo(
     () => [
       {
-        header: 'Avatar',
-        accessorKey: 'avatar',
+        header: 'Logo',
+        accessorKey: 'logo',
         cell: column => (
           <Avatar>
             <AvatarImage
-              src={column.row.original.avatarURL}
+              src={column.row.original.logo}
               alt={column.row.original.name}
             />
           </Avatar>
         )
       },
       {
-        header: 'Country',
-        accessorKey: 'country.name'
-      },
-      {
-        header: 'Company',
-        accessorKey: 'company.name',
-        cell: column => (
-          <div className="flex gap-2 items-center">
-            <Avatar>
-              <AvatarImage
-                src={column.row.original.company.logo}
-                alt={column.row.original.company.name}
-              />
-            </Avatar>
-            <span> {column.row.original.company.name}</span>
-          </div>
-        )
-      },
-      {
         header: 'Name',
-        accessorKey: 'name',
-        cell: column => (
-          <p>
-            {column.row.original.firstName + ' ' + column.row.original.lastName}
-          </p>
-        )
-      },
-      {
-        header: 'Email',
-        accessorKey: 'email'
-      },
-      {
-        header: 'PhoneNumber',
-        accessorKey: 'phoneNumber'
+        accessorKey: 'name'
       },
       {
         header: () => <div className="text-center">Action</div>,
@@ -114,12 +82,7 @@ export default function User() {
         cell: column => (
           <div className="flex gap-2 justify-center">
             <Button variant="outline" className="h-8 w-8 p-0">
-              <Edit
-                className="cursor-pointer"
-                onClick={() => {
-                  setUser(column.row.original)
-                }}
-              />
+              <Edit className="cursor-pointer" />
             </Button>
             <Button
               variant="outline"
@@ -137,9 +100,8 @@ export default function User() {
     []
   )
 
-  const handleEditUser = async data => {
-    await editUserMutation.mutateAsync(data)
-    setUser(undefined)
+  const handleCreateCompany = (data: Company) => {
+    createCompanyMutation.mutate(data)
   }
 
   const debouncedSearch = debounce(e => {
@@ -148,22 +110,14 @@ export default function User() {
 
   return (
     <Card className="p-10 m-10 space-y-5">
-      <CardTitle> User List </CardTitle>
+      <CardTitle> Company List </CardTitle>
       <div className="flex justify-between">
         <div className="flex gap-5">
           <div className="space-y-3">
-            <p className="text-muted-foreground">Select Country</p>
-            <CountrySelector value={country} onValueChange={setCountry} />
-          </div>
-          {/* <div className="space-y-3">
-            <p className="text-muted-foreground">Select User</p>
-            <UserSelector value={user} onValueChange={setUser} />
-          </div> */}
-          <div className="space-y-3">
-            <p className="text-muted-foreground">Search by Email</p>
+            <p className="text-muted-foreground">Search by name</p>
             <Input
               defaultValue={search}
-              placeholder="Search by Email"
+              placeholder="Search by name"
               icon={Search}
               onChange={debouncedSearch}
             />
@@ -178,24 +132,22 @@ export default function User() {
             <FileUp />
             Import Excel
           </Button>
+          <CreateCompanyModal
+            loading={createCompanyMutation.isLoading}
+            onSubmit={handleCreateCompany}
+            isOpen={modal}
+            onClose={() => setModal(false)}
+            onOpen={() => setModal(true)}
+          />
         </div>
       </div>
-      {user && (
-        <EditUserModal
-          loading={editUserMutation.isLoading}
-          isOpen={!!user}
-          user={user}
-          onSubmit={handleEditUser}
-          onClose={() => setUser(undefined)}
-        />
-      )}
       <DataTable
         pagination={pagination}
         onPaginationChange={setPagination}
-        total={users?.data?.total ?? 0}
+        total={companies?.data?.total ?? 0}
         loading={isLoading}
         className="mt-4"
-        data={users?.data?.items ?? []}
+        data={companies?.data?.items ?? []}
         columns={columns}
       />
     </Card>

@@ -2,7 +2,8 @@
   "compilerOptions": {
     // Language and Environment
     "jsx": "react-jsx",
-    "target": "es2016",
+    "target": "ESNext",
+    "moduleResolution": "Node",
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "esModuleInterop": true,
     // Interop Constraints
@@ -25,7 +26,7 @@
     "noUncheckedIndexedAccess": false,
     "useUnknownInCatchVariables": true,
     // Modules
-    "module": "commonjs",
+    "module": "ESNext",
     "types": ["vite/client"],
 
     // JavaScript Support

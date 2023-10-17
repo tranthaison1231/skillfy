@@ -1,16 +1,17 @@
-import { mockRequest } from '@/utils/request'
+import type { Pagination } from '@/types/pagination'
+import { request } from '@/utils/request'
 
 export interface User {
   id: string
   country: string
-  avatar: string
-  name: string
-  username: string
+  avatarURL: string
+  firstName: string
+  lastName: string
   email: string
   phoneNumber: string
 }
 
-export const fetchUser = async ({
+export const getUsers = async ({
   search,
   country,
   page = 1,
@@ -21,36 +22,24 @@ export const fetchUser = async ({
   page?: number
   limit?: number
 }) => {
-  return mockRequest.get('/users', {
+  return request.get<Pagination<User>>('/users', {
     params: {
-      search: search || undefined,
+      email: search || undefined,
       country: country || undefined,
-      page,
+      page: page + 1,
       limit
     }
   })
 }
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
 export const createUser = async user => {
-  return mockRequest.post('/users', user)
+  return request.post('/users', user)
 }
 
 export const deleteUser = async (id: string) => {
-  return mockRequest.delete(`/users/${id}`)
+  return request.delete(`/users/${id}`)
 }
 
 export const editUser = async ({ id, ...data }: User) => {
-  return mockRequest.put(`/users/${id}`, data)
-}
-
-export const getCountries = async () => {
-  return Promise.resolve([
-    'Turkmenistan',
-    'Venezuela',
-    'Monaco',
-    'Montserrat',
-    'Guam'
-  ])
+  return request.put(`/users/${id}`, data)
 }

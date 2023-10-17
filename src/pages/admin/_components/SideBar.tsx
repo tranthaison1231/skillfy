@@ -8,6 +8,7 @@ import { AccordionTrigger } from '@radix-ui/react-accordion'
 import clsx from 'clsx'
 import {
   BookmarkMinus,
+  Building2,
   ChevronRight,
   Edit,
   LayoutDashboard,
@@ -78,6 +79,11 @@ const SIDER_BAR = [
             href: '/admin/users/edit'
           }
         ]
+      },
+      {
+        label: 'Company',
+        icon: <Building2 />,
+        href: '/admin/companies'
       },
       {
         label: 'Utilities',

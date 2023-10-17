@@ -49,18 +49,18 @@ export default function EditUserModal({
             <DialogTitle>Edit User</DialogTitle>
           </DialogHeader>
           <div className="grid gap-4 py-4">
-            <label htmlFor="name">Name</label>
-            <Input id="name" {...register('name')} />
-            <label htmlFor="name">User name</label>
-            <Input id="username" {...register('username')} />
+            <label htmlFor="firstName">First Name</label>
+            <Input id="firstName" {...register('firstName')} />
+            <label htmlFor="lastName">Last Name</label>
+            <Input id="lastName" {...register('lastName')} />
             <label htmlFor="email">Email</label>
             <Input id="email" {...register('email')} />
             <label htmlFor="phoneNumber">Phone Number</label>
             <Input id="phoneNumber" {...register('phoneNumber')} />
-            <label htmlFor="country">Country</label>
-            <Input id="country" {...register('country')} />
+            {/* <label htmlFor="country">Country</label>
+            <Input id="country" {...register('country')} /> */}
             <label htmlFor="avatar">Avatar</label>
-            <Input id="avatar" {...register('avatar')} />
+            <Input id="avatar" {...register('avatarURL')} />
           </div>
           <DialogFooter>
             <Button type="submit" isLoading={loading}>

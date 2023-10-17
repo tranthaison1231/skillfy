@@ -7,13 +7,13 @@ import linkedin from '@/assets/svgs/linkedin.svg'
 import { Button } from '@/components/Button'
 import { Checkbox } from '@/components/Checkbox'
 import { Input } from '@/components/Input'
-import { useToast } from '@/components/use-toast'
 import { Link, useNavigate } from '@/router'
 import { LoginSchema } from '@/utils/shema'
 import { setToken } from '@/utils/token'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
+import { toast } from 'sonner'
 import * as z from 'zod'
 
 const socials = [
@@ -54,7 +54,6 @@ export default function Login() {
     }
   })
   const navigate = useNavigate()
-  const { toast } = useToast()
 
   const onSubmit: SubmitHandler<z.infer<typeof LoginSchema>> = async ({
     email,
@@ -66,14 +65,9 @@ export default function Login() {
       setToken(res.data.accessToken)
       navigate('/admin')
     } catch (error) {
-      toast({
-        title: 'Error',
-
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
-        description: error.response.data.message,
-        variant: 'destructive'
-      })
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      toast.error(error.response.data.message)
     } finally {
       setIsLoading(false)
     }

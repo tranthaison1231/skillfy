@@ -24,7 +24,7 @@ export default function UserSelector({ value, onValueChange }: SelectProps) {
         <SelectGroup>
           {data?.data?.map(user => (
             <SelectItem key={user.id} value={user.id}>
-              {user.name}
+              {user.firstName} {user.lastName}
             </SelectItem>
           ))}
         </SelectGroup>

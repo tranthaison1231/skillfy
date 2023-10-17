@@ -19,7 +19,7 @@ interface Props {
   loading: boolean
 }
 
-export default function CreateUserModal({
+export default function CreateCompanyModal({
   onSubmit,
   onClose,
   isOpen,
@@ -30,11 +30,7 @@ export default function CreateUserModal({
     mode: 'onBlur',
     defaultValues: {
       name: '',
-      username: '',
-      email: '',
-      phoneNumber: '',
-      country: '',
-      avatar: ''
+      logo: ''
     }
   })
 
@@ -52,27 +48,19 @@ export default function CreateUserModal({
       <DialogTrigger asChild>
         <Button variant="outline">
           <Plus />
-          Create User
+          Create Company
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <form onSubmit={handleSubmit(onSubmit)}>
           <DialogHeader>
-            <DialogTitle>Create User</DialogTitle>
+            <DialogTitle>Create Company</DialogTitle>
           </DialogHeader>
           <div className="grid gap-4 py-4">
             <label htmlFor="name">Name</label>
             <Input id="name" {...register('name')} />
-            <label htmlFor="name">User name</label>
-            <Input id="username" {...register('username')} />
-            <label htmlFor="email">Email</label>
-            <Input id="email" {...register('email')} />
-            <label htmlFor="phoneNumber">Phone Number</label>
-            <Input id="phoneNumber" {...register('phoneNumber')} />
-            <label htmlFor="country">Country</label>
-            <Input id="country" {...register('country')} />
-            <label htmlFor="avatar">Avatar</label>
-            <Input id="avatar" {...register('avatar')} />
+            <label htmlFor="logo">Logo</label>
+            <Input id="logo" {...register('logo')} />
           </div>
           <DialogFooter>
             <Button type="submit" isLoading={loading}>

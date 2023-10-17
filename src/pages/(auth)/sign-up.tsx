@@ -7,12 +7,12 @@ import linkedin from '@/assets/svgs/linkedin.svg'
 import { Button } from '@/components/Button'
 import { Checkbox } from '@/components/Checkbox'
 import { Input } from '@/components/Input'
-import { useToast } from '@/components/use-toast'
 import { Link, useNavigate } from '@/router'
 import { SignUpSchema } from '@/utils/shema'
 import { setToken } from '@/utils/token'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { SubmitHandler, useForm } from 'react-hook-form'
+import { toast } from 'sonner'
 import * as z from 'zod'
 
 const socials = [
@@ -50,7 +50,6 @@ export default function Login() {
     mode: 'onBlur'
   })
   const navigate = useNavigate()
-  const { toast } = useToast()
 
   const onSubmit: SubmitHandler<SignUpInputs> = async ({
     email,
@@ -68,21 +67,12 @@ export default function Login() {
         phoneNumber
       )
       setToken(res.data.accessToken)
-      toast({
-        variant: 'success',
-        title: 'Login Success',
-        description: res.data.message
-      })
+      toast.success('Login Success')
       navigate('/login')
     } catch (error) {
-      toast({
-        title: 'Error',
-
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
-        description: error.response.data.message,
-        variant: 'destructive'
-      })
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      toast.error(error.response.data.message)
     }
   }
 
