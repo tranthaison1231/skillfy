@@ -1,4 +1,5 @@
 import { presignedUrl } from '@/apis/upload'
+import { Avatar } from '@/components/Avatar'
 import { Button } from '@/components/Button'
 import {
   Dialog,
@@ -10,10 +11,11 @@ import {
 } from '@/components/Dialog'
 import { Input } from '@/components/Input'
 import UploadButton from '@/components/UploadButton'
+import { AvatarImage } from '@radix-ui/react-avatar'
 import axios from 'axios'
 import { Plus } from 'lucide-react'
 import { useEffect } from 'react'
-import { useForm } from 'react-hook-form'
+import { useForm, useWatch } from 'react-hook-form'
 import { toast } from 'sonner'
 
 interface Props {
@@ -31,13 +33,14 @@ export default function CreateCompanyModal({
   onOpen,
   loading
 }: Props) {
-  const { register, handleSubmit, reset, clearErrors } = useForm({
-    mode: 'onBlur',
-    defaultValues: {
-      name: '',
-      logo: ''
-    }
-  })
+  const { register, control, handleSubmit, reset, clearErrors, setValue } =
+    useForm({
+      mode: 'onBlur',
+      defaultValues: {
+        name: '',
+        logo: ''
+      }
+    })
 
   useEffect(() => {
     if (!isOpen) {
@@ -50,25 +53,27 @@ export default function CreateCompanyModal({
       clearErrors('logo')
       const file = e.target.files?.[0]
       if (!file) return
-      const formData = new FormData()
-      formData.append('file', file)
       const { data } = await presignedUrl({
         fileName: file.name,
         type: file.type
       })
-      const res = await axios({
+      await axios({
         url: data.uploadUrl,
         method: 'PUT',
-        data: formData,
+        data: file,
         headers: {
           'Content-Type': file.type
         }
       })
-      console.log(res)
+      setValue('logo', data.url)
     } catch (error) {
       toast.error('Upload fail!')
     }
   }
+
+  const { logo } = useWatch({
+    control
+  })
 
   return (
     <Dialog
@@ -96,12 +101,18 @@ export default function CreateCompanyModal({
             <label htmlFor="name">Name</label>
             <Input id="name" {...register('name')} />
             <label htmlFor="logo">Logo</label>
-            <UploadButton
-              id="logo"
-              accept="image/*"
-              {...register('logo')}
-              onChange={onUpload}
-            />
+            {logo ? (
+              <Avatar>
+                <AvatarImage src={logo} alt="avatar" />
+              </Avatar>
+            ) : (
+              <UploadButton
+                id="logo"
+                accept="image/*"
+                {...register('logo')}
+                onChange={onUpload}
+              />
+            )}
           </div>
           <DialogFooter>
             <Button type="submit" isLoading={loading}>
