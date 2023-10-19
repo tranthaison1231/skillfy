@@ -61,7 +61,11 @@ export default function Companies() {
   })
 
   const exportCompaniesQuery = useMutation(exportCompanies, {
-    onSuccess: () => {
+    onSuccess: data => {
+      const link = document.createElement('a')
+      link.href = URL.createObjectURL(data.data)
+      link.download = 'companies.csv'
+      link.click()
       toast.success('Exported successfully!')
     }
   })

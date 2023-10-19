@@ -38,5 +38,7 @@ export const editCompany = async ({ id, ...data }: Company) => {
 }
 
 export const exportCompanies = async () => {
-  return request.get('/companies/export-excel')
+  return request.get('/companies/export-excel', {
+    responseType: 'blob'
+  })
 }
