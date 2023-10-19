@@ -1,5 +1,5 @@
 import { deleteUser, editUser, getUsers, type User } from '@/apis/users'
-import { Avatar, AvatarImage } from '@/components/Avatar'
+import { Avatar } from '@/components/Avatar'
 import { Button } from '@/components/Button'
 import { Card, CardTitle } from '@/components/Card'
 import { DataTable } from '@/components/DataTable'
@@ -63,14 +63,7 @@ export default function User() {
       {
         header: 'Avatar',
         accessorKey: 'avatar',
-        cell: column => (
-          <Avatar>
-            <AvatarImage
-              src={column.row.original.avatarURL}
-              alt={column.row.original.name}
-            />
-          </Avatar>
-        )
+        cell: column => <Avatar url={column.row.original.avatarURL} />
       },
       {
         header: 'Country',
@@ -81,12 +74,7 @@ export default function User() {
         accessorKey: 'company.name',
         cell: column => (
           <div className="flex gap-2 items-center">
-            <Avatar>
-              <AvatarImage
-                src={column.row.original.company.logo}
-                alt={column.row.original.company.name}
-              />
-            </Avatar>
+            <Avatar url={column.row.original.company.logo} />
             <span> {column.row.original.company.name}</span>
           </div>
         )

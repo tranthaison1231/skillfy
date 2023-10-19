@@ -2,9 +2,11 @@ import {
   Company,
   createCompany,
   deleteCompany,
-  getCompanies
+  editCompany,
+  getCompanies,
+  exportCompanies
 } from '@/apis/companies'
-import { Avatar, AvatarImage } from '@/components/Avatar'
+import { Avatar } from '@/components/Avatar'
 import { Button } from '@/components/Button'
 import { Card, CardTitle } from '@/components/Card'
 import { DataTable } from '@/components/DataTable'
@@ -18,9 +20,12 @@ import { useMemo, useState } from 'react'
 import { useMutation, useQuery, useQueryClient } from 'react-query'
 import { toast } from 'sonner'
 import CreateCompanyModal from './_components/CreateCompanyModal'
+import EditCompanyModal from './_components/EditCompanyModal'
 
-export default function User() {
+export default function Companies() {
+  const [loadingExportExcel, setLoadingExportExcel] = useState(false)
   const [modal, setModal] = useState(false)
+  const [company, setCompany] = useState<Company | null>(null)
   const queryClient = useQueryClient()
   const [search, setSearch] = useSearchParamsState('search', '')
   const [{ pageIndex, pageSize }, setPagination] =
@@ -39,11 +44,25 @@ export default function User() {
       })
   )
 
+  const editCompanyMutation = useMutation(editCompany, {
+    onSuccess: () => {
+      queryClient.invalidateQueries('companies')
+      toast.success('Edited successfully!')
+      setCompany(undefined)
+    }
+  })
+
   const createCompanyMutation = useMutation(createCompany, {
     onSuccess: () => {
       queryClient.invalidateQueries('companies')
       toast.success('Created successfully!')
       setModal(false)
+    }
+  })
+
+  const exportCompaniesQuery = useMutation(exportCompanies, {
+    onSuccess: () => {
+      toast.success('Exported successfully!')
     }
   })
 
@@ -67,14 +86,7 @@ export default function User() {
       {
         header: 'Logo',
         accessorKey: 'logo',
-        cell: column => (
-          <Avatar>
-            <AvatarImage
-              src={column.row.original.logo}
-              alt={column.row.original.name}
-            />
-          </Avatar>
-        )
+        cell: column => <Avatar url={column.row.original.logo} />
       },
       {
         header: 'Name',
@@ -85,7 +97,13 @@ export default function User() {
         accessorKey: 'action',
         cell: column => (
           <div className="flex gap-2 justify-center">
-            <Button variant="outline" className="h-8 w-8 p-0">
+            <Button
+              variant="outline"
+              className="h-8 w-8 p-0"
+              onClick={() => {
+                setCompany(column.row.original)
+              }}
+            >
               <Edit className="cursor-pointer" />
             </Button>
             <Button
@@ -108,6 +126,19 @@ export default function User() {
     createCompanyMutation.mutate(data)
   }
 
+  const handleEditCompany = async data => {
+    editCompanyMutation.mutateAsync({
+      ...company,
+      ...data
+    })
+  }
+
+  const handleExportExcel = async () => {
+    setLoadingExportExcel(true)
+    await exportCompaniesQuery.mutateAsync()
+    setLoadingExportExcel(false)
+  }
+
   const debouncedSearch = debounce(e => {
     setSearch(e.target.value)
   }, 400)
@@ -128,14 +159,15 @@ export default function User() {
           </div>
         </div>
         <div className="flex gap-4">
-          <Button variant="sheet">
-            <FileDown />
+          <Button
+            variant="sheet"
+            icon={<FileDown />}
+            isLoading={loadingExportExcel}
+            onClick={handleExportExcel}
+          >
             Export Excel
           </Button>
-          <Button>
-            <FileUp />
-            Import Excel
-          </Button>
+          <Button icon={<FileUp />}>Import Excel</Button>
           <CreateCompanyModal
             loading={createCompanyMutation.isLoading}
             onSubmit={handleCreateCompany}
@@ -154,6 +186,15 @@ export default function User() {
         data={companies?.data?.items ?? []}
         columns={columns}
       />
+      {company && (
+        <EditCompanyModal
+          loading={editCompanyMutation.isLoading}
+          isOpen={!!company}
+          company={company}
+          onSubmit={handleEditCompany}
+          onClose={() => setCompany(undefined)}
+        />
+      )}
     </Card>
   )
 }

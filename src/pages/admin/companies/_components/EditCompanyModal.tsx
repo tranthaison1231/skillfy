@@ -1,3 +1,4 @@
+import { Company } from '@/apis/companies'
 import { presignedUrl } from '@/apis/upload'
 import { Avatar } from '@/components/Avatar'
 import { Button } from '@/components/Button'
@@ -6,16 +7,14 @@ import {
   DialogContent,
   DialogFooter,
   DialogHeader,
-  DialogTitle,
-  DialogTrigger
+  DialogTitle
 } from '@/components/Dialog'
 import { Input } from '@/components/Input'
 import UploadButton from '@/components/UploadButton'
 import { CreateCompanySchema } from '@/utils/shema'
 import { zodResolver } from '@hookform/resolvers/zod'
 import axios from 'axios'
-import { Plus } from 'lucide-react'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useForm, useWatch } from 'react-hook-form'
 import { toast } from 'sonner'
 
@@ -23,40 +22,32 @@ interface Props {
   onSubmit: (data) => void
   onClose: () => void
   isOpen: boolean
-  onOpen: () => void
+  onOpen?: () => void
   loading: boolean
+  company?: Company
 }
 
-export default function CreateCompanyModal({
+export default function EditCompanyModal({
   onSubmit,
   onClose,
   isOpen,
   onOpen,
-  loading
+  loading,
+  company
 }: Props) {
   const [uploadLoading, setUploadLoading] = useState(false)
   const {
     register,
     control,
     handleSubmit,
-    reset,
     clearErrors,
     setValue,
     formState: { errors }
   } = useForm({
     mode: 'onBlur',
     resolver: zodResolver(CreateCompanySchema),
-    defaultValues: {
-      name: '',
-      logo: ''
-    }
+    defaultValues: company
   })
-
-  useEffect(() => {
-    if (!isOpen) {
-      reset()
-    }
-  }, [isOpen])
 
   const onUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     try {
@@ -99,15 +90,10 @@ export default function CreateCompanyModal({
         }
       }}
     >
-      <DialogTrigger asChild>
-        <Button variant="outline" icon={<Plus />}>
-          Create Company
-        </Button>
-      </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <form onSubmit={handleSubmit(onSubmit)}>
           <DialogHeader>
-            <DialogTitle>Create Company</DialogTitle>
+            <DialogTitle>Edit Company</DialogTitle>
           </DialogHeader>
           <div className="grid gap-4 py-4">
             <label htmlFor="name">Name</label>

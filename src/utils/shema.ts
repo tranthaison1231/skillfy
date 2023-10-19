@@ -45,3 +45,12 @@ export const SignUpSchema = LoginSchema.extend({
   message: "Passwords don't match",
   path: ['confirmPassword']
 })
+
+export const CreateCompanySchema = z.object({
+  name: z.string().min(1, {
+    message: 'Name is required'
+  }),
+  logo: z.string().min(1, {
+    message: 'Logo is required'
+  })
+})

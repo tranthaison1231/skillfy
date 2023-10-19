@@ -1,5 +1,5 @@
 import Logo from '@/assets/svgs/logo-1.svg'
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/Avatar'
+import { Avatar } from '@/components/Avatar'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -92,10 +92,7 @@ export default function Header({ user, loading, isToggler, onToggle }: Props) {
                       </>
                     ) : (
                       <>
-                        <Avatar>
-                          <AvatarImage src={user.avatarURL} alt="@shadcn" />
-                          <AvatarFallback>{user.firstName}</AvatarFallback>
-                        </Avatar>
+                        <Avatar url={user.avatarURL} />
                         <div className="w-max">
                           <h2 className="text-slate-800">
                             {user.firstName + ' ' + user.lastName}

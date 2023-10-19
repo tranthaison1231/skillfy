@@ -36,3 +36,7 @@ export const deleteCompany = async (id: string) => {
 export const editCompany = async ({ id, ...data }: Company) => {
   return request.put(`/companies/${id}`, data)
 }
+
+export const exportCompanies = async () => {
+  return request.get('/companies/export-excel')
+}
