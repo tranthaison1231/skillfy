@@ -9,10 +9,10 @@ export interface Company {
 
 export const getCompanies = async ({
   search,
-  page = 1,
-  limit = 5
+  page = 0,
+  limit = 10
 }: {
-  search: string
+  search?: string
   page?: number
   limit?: number
 }) => {

@@ -7,15 +7,18 @@ export interface Country {
 }
 
 export const getCountries = async ({
-  page = 1,
-  limit = 5
+  q,
+  pageParam = 1,
+  limit = 10
 }: {
-  page?: number
+  q?: string
+  pageParam?: number
   limit?: number
 }) => {
   return request.get<Pagination<Country>>('/countries', {
     params: {
-      page,
+      q,
+      page: pageParam,
       limit
     }
   })

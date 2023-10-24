@@ -1,41 +1,70 @@
-import { Country, getCountries } from '@/apis/countries'
+import { getCountries } from '@/apis/countries'
+import { Input } from '@/components/Input'
 import {
   Select,
   SelectContent,
-  SelectGroup,
   SelectItem,
   SelectTrigger,
-  SelectValue
+  SelectValue,
+  SelectGroup
 } from '@/components/Select'
 import { SelectProps } from '@radix-ui/react-select'
-import { useEffect, useState } from 'react'
+import { Search } from 'lucide-react'
+import { useState } from 'react'
+import { useInfiniteQuery } from 'react-query'
 
 export default function CountrySelector({ value, onValueChange }: SelectProps) {
-  const [countries, setCountries] = useState<Country[]>([])
+  const [search, setSearch] = useState('')
 
-  useEffect(() => {
-    const fetchCountries = async () => {
-      try {
-        const data = await getCountries({})
-        setCountries(data.data.items)
-      } catch (error) {
-        console.error(error)
-      }
+  const { data, fetchNextPage, isFetching } = useInfiniteQuery({
+    queryKey: ['countries', search],
+    queryFn: ({ queryKey, pageParam }) =>
+      getCountries({ q: queryKey[1], pageParam }),
+    getNextPageParam: lastPage => {
+      return lastPage.data.page + 1
     }
-    fetchCountries()
-  }, [])
+  })
+
+  const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
+    const { scrollHeight, scrollTop, clientHeight } = e.target as HTMLDivElement
+    if (scrollTop + clientHeight >= scrollHeight && !isFetching) {
+      fetchNextPage()
+    }
+  }
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearch(e.target.value)
+  }
+
   return (
     <Select value={value} onValueChange={onValueChange}>
-      <SelectTrigger className="w-40" onValueChange={onValueChange}>
+      <SelectTrigger className="w-60" onValueChange={onValueChange}>
         <SelectValue placeholder="Select a country" />
       </SelectTrigger>
       <SelectContent>
-        <SelectGroup>
-          {countries.map(country => (
-            <SelectItem key={country.id} value={country.id}>
-              {country.name}
+        <Input
+          icon={Search}
+          placeholder="Search by name"
+          onChange={handleChange}
+          value={search}
+        />
+        <SelectGroup
+          onScroll={handleScroll}
+          className="overflow-y-auto min-h-[15rem] h-[15rem]"
+        >
+          {data?.pages?.map(
+            page =>
+              page.data.items?.map(country => (
+                <SelectItem key={country.id} value={country.id}>
+                  {country.name}
+                </SelectItem>
+              ))
+          )}
+          {isFetching && (
+            <SelectItem value="loading" disabled>
+              Loading...
             </SelectItem>
-          ))}
+          )}
         </SelectGroup>
       </SelectContent>
     </Select>

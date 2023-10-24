@@ -8,17 +8,19 @@ import { usePersistState } from '@/hooks/usePersistState'
 import { useSearchParamsState } from '@/hooks/useSearchParamsState'
 import { PaginationState } from '@tanstack/react-table'
 import debounce from 'lodash.debounce'
-import { Edit, FileDown, FileUp, Search, Trash } from 'lucide-react'
+import { Edit, Search, Trash } from 'lucide-react'
 import { useMemo, useState } from 'react'
 import { useMutation, useQuery, useQueryClient } from 'react-query'
 import { toast } from 'sonner'
 import CountrySelector from './_components/CountrySelector'
 import EditUserModal from './_components/EditUserModal'
+import CompanySelector from './_components/CompanySelector'
 
 export default function User() {
   const queryClient = useQueryClient()
   const [country, setCountry] = useSearchParamsState('country', '')
   const [search, setSearch] = useSearchParamsState('search', '')
+  const [company, setCompany] = useSearchParamsState('company', '')
   const [user, setUser] = useState<User>()
   const [{ pageIndex, pageSize }, setPagination] =
     usePersistState<PaginationState>({
@@ -74,8 +76,8 @@ export default function User() {
         accessorKey: 'company.name',
         cell: column => (
           <div className="flex gap-2 items-center">
-            <Avatar url={column.row.original.company.logo} />
-            <span> {column.row.original.company.name}</span>
+            <Avatar url={column.row.original?.company?.logo} />
+            <span> {column.row.original?.company?.name}</span>
           </div>
         )
       },
@@ -143,10 +145,10 @@ export default function User() {
             <p className="text-muted-foreground">Select Country</p>
             <CountrySelector value={country} onValueChange={setCountry} />
           </div>
-          {/* <div className="space-y-3">
-            <p className="text-muted-foreground">Select User</p>
-            <UserSelector value={user} onValueChange={setUser} />
-          </div> */}
+          <div className="space-y-3">
+            <p className="text-muted-foreground">Select Company</p>
+            <CompanySelector value={company} onChange={setCompany} />
+          </div>
           <div className="space-y-3">
             <p className="text-muted-foreground">Search by Email</p>
             <Input
@@ -156,16 +158,6 @@ export default function User() {
               onChange={debouncedSearch}
             />
           </div>
-        </div>
-        <div className="flex gap-4">
-          <Button variant="sheet">
-            <FileDown />
-            Export Excel
-          </Button>
-          <Button>
-            <FileUp />
-            Import Excel
-          </Button>
         </div>
       </div>
       {user && (
