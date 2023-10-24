@@ -1,114 +1,90 @@
 import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow
-} from '@/components/Table'
+  Area,
+  AreaChart,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis
+} from 'recharts'
 
-const INVOICES = [
+const data = [
   {
-    id: 1,
-    title: 'Item 1',
-    desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-    quality: 5,
-    price: '$1200',
-    totals: '$2.888.00'
+    name: 'Jan',
+    uv: 4000,
+    pv: 2400,
+    amt: 2400
   },
   {
-    id: 2,
-    title: 'Item 2',
-    desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-    quality: 5,
-    price: '$1200',
-    totals: '$2.888.00'
+    name: 'Feb',
+    uv: 3000,
+    pv: 1398,
+    amt: 2210
   },
   {
-    id: 3,
-    title: 'Item 3',
-    desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-    quality: 5,
-    price: '$1200',
-    totals: '$2.888.00'
+    name: 'Mar',
+    uv: 2000,
+    pv: 9800,
+    amt: 2290
   },
   {
-    id: 4,
-    title: 'Item 4',
-    desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-    quality: 5,
-    price: '$1200',
-    totals: '$2.888.00'
+    name: 'Apr',
+    uv: 2780,
+    pv: 3908,
+    amt: 2000
   },
   {
-    id: 5,
-    title: 'Totals',
-    totals: '$2.888.00'
-  },
-  {
-    id: 6,
-    title: 'Taxs',
-    totals: '$2.888.00'
-  },
-  {
-    id: 7,
-    title: 'Discount',
-    totals: '$2.888.00'
+    name: 'Jun',
+    uv: 1890,
+    pv: 4800,
+    amt: 2181
   }
 ]
 
 function Dashboard() {
   return (
-    <>
-      <div className="bg-blue-500 pt-14 pb-20 px-10 rounded-bl-2xl rounded-br-2xl">
-        <div className="flex flex-col">
-          <h1 className="text-4xl font-bold text-white">Hello Devs !</h1>
-          <p className="text-2xl text-white">
-            We are on a mission to help developers like you to build beautiful
-            projects for free.
-          </p>
+    <div className="p-10 grid grid-cols-3 gap-10">
+      <div className="col-span-2">
+        <div className="p-6 bg-white">
+          <ResponsiveContainer width="100%" height={500}>
+            <AreaChart
+              width={730}
+              height={250}
+              data={data}
+              margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
+            >
+              <defs>
+                <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="5%" stopColor="#3A57E8" stopOpacity={0.2} />
+                  <stop offset="95%" stopColor="#3A57E8" stopOpacity={0} />
+                </linearGradient>
+                <linearGradient id="colorPv" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="5%" stopColor="#85F4FA" stopOpacity={0.2} />
+                  <stop offset="95%" stopColor="#85F4FA" stopOpacity={0} />
+                </linearGradient>
+              </defs>
+              <XAxis dataKey="name" />
+              <YAxis tickLine={false} axisLine={false} />
+              <Tooltip />
+              <Area
+                type="monotone"
+                dataKey="uv"
+                stroke="#3A57E8"
+                fillOpacity={1}
+                fill="url(#colorUv)"
+              />
+              <Area
+                type="monotone"
+                dataKey="pv"
+                stroke="#85F4FA"
+                fillOpacity={1}
+                fill="url(#colorPv)"
+              />
+            </AreaChart>
+          </ResponsiveContainer>
         </div>
       </div>
-      <div className="px-10 -mt-10">
-        <div className="bg-white p-6 rounded-lg shadow pb-8 mb-3 h-full mx-auto">
-          <div className="flex justify-between">
-            <h1 className="mt-10 mb-4 text-3xl font-bold">Invoice #215462</h1>
-            <span className="mt-10 leading-7">DUE DATE: Aug 19, 2022</span>
-          </div>
-          <h1 className="mb-8 text-3xl font-bold">Hello , Devon Lane </h1>
-          <p className="leading-7 text-zinc-950">
-            It is a long established fact that a reader will be distracted by
-            the readable content of a page when looking at its layout. The point
-            of using Lorem Ipsum is that it has a more-or-less normal
-            distribution of letters, as opposed to using 'Content here, content
-            here', making it look like readable English.
-          </p>
-          <Table className="mt-14">
-            <TableHeader>
-              <TableRow>
-                <TableHead>Items</TableHead>
-                <TableHead>Quantity</TableHead>
-                <TableHead>Price</TableHead>
-                <TableHead className="text-right">Totals</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {INVOICES.map(invoice => (
-                <TableRow key={invoice.id}>
-                  <TableCell>
-                    <p>{invoice.title}</p>
-                    <span>{invoice.desc}</span>
-                  </TableCell>
-                  <TableCell>{invoice.quality}</TableCell>
-                  <TableCell>{invoice.price}</TableCell>
-                  <TableCell className="text-right">{invoice.totals}</TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </div>
-      </div>
-    </>
+      <div className="col-span-1">Hello</div>
+    </div>
   )
 }
 
