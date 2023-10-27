@@ -17,7 +17,7 @@
   "license": "ISC",
   "devDependencies": {
     "@types/lodash.debounce": "^4.0.8",
-    "@types/react": "^18.2.31",
+    "@types/react": "^18.2.33",
     "@types/react-dom": "^18.2.14",
     "@typescript-eslint/eslint-plugin": ">=6.9.0",
     "@typescript-eslint/parser": ">=6.9.0",
@@ -35,7 +35,7 @@
     "eslint-plugin-promise": "^6.1.1",
     "husky": "^8.0.3",
     "prettier": "^3.0.3",
-    "tailwindcss": "^3.3.3",
+    "tailwindcss": "^3.3.5",
     "typescript": "^5.2.2",
     "vite": "^4.5.0"
   },
@@ -61,7 +61,7 @@
     "cmdk": "^0.2.0",
     "dayjs": "^1.11.10",
     "lodash.debounce": "^4.0.8",
-    "lucide-react": "^0.288.0",
+    "lucide-react": "^0.289.0",
     "react": "^18.2.0",
     "react-day-picker": "^8.9.1",
     "react-dom": "^18.2.0",
